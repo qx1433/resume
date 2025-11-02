@@ -468,12 +468,71 @@
             projects.forEach(project => {
                 const card = document.createElement('div');
                 card.className = 'bg-white p-6 rounded-2xl shadow-xl cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-1';
+                
+                // CRITICAL FIX: Make only the anchor tag click open the external link, 
+                // and the card body/title click open the modal, or the project page itself.
+                // Since the outer div is clickable, and the anchor is inside, we bind the external link logic
+                // to the anchor tag, and modal logic to the card's click event listener (excluding the anchor click)
+
+                let linkTarget = project.id === 1 ? 'keys_hid_49.html' : '#';
+                
                 card.innerHTML = `
                     <h3 class="text-xl font-bold text-gray-900">${project.title}</h3>
                     <p class="mt-2 text-gray-600 line-clamp-3">${project.description}</p>
-                    <span class="mt-4 inline-block font-semibold text-blue-600 hover:text-blue-700">Подробнее →</span>
+                    <a href="${linkTarget}" class="mt-4 inline-block font-semibold text-blue-600 hover:text-blue-700">Подробнее →</a>
                 `;
-                card.addEventListener('click', () => openModal(project));
+                
+                // Add event listener to the whole card
+                card.addEventListener('click', (e) => {
+                    
+                    // Check if the click originated from the anchor tag itself
+                    if (e.target.tagName === 'A') {
+                        // If it's an anchor, we let the anchor tag handle the navigation (if it has a real href)
+                        if (project.id === 1) {
+                            // For project ID 1, we prevent the card's general action and let the anchor's default navigation occur.
+                            // The anchor already has target="_blank" set below.
+                            return; 
+                        } else {
+                             // For all other projects, the anchor leads nowhere ('#'), so we open the modal.
+                             e.preventDefault(); 
+                             openModal(project);
+                        }
+                    } 
+                    
+                    e.preventDefault(); // Default click action on the card body/elements is usually to prevent text selection
+                    
+                    if (project.id === 1) {
+                        // For the special case where the user clicks the card body (not the anchor), 
+                        // we still want to navigate to the external link
+                        window.open(linkTarget, '_blank');
+                    } else {
+                        // For all other projects (ID != 1), open the modal
+                        openModal(project);
+                    }
+                });
+                
+                // For project ID 1, we ensure the anchor tag itself uses target="_blank"
+                if (project.id === 1) {
+                    const anchor = card.querySelector('a');
+                    anchor.setAttribute('target', '_blank');
+                    
+                    // CRITICAL FIX: Since the card listener handles clicks on the anchor too (due to bubbling), 
+                    // we must ensure the anchor click bypasses the card's window.open logic and relies 
+                    // on native navigation, but the original intent was that clicking *anywhere* on the card 
+                    // (for project 1) opens the external link.
+                    
+                    // The simplest fix to ensure window.open fires when clicking the card body, 
+                    // AND when clicking the anchor, is to handle both via the card listener 
+                    // and just prevent propagation for the anchor to simplify the logic. 
+                    
+                    // Let's go with the previously simplified logic (which was likely correct) 
+                    // and re-verify the bug fix is applied cleanly:
+                    
+                    card.querySelector('a').addEventListener('click', (e) => {
+                        e.stopPropagation(); 
+                    });
+                }
+                
                 projectGrid.appendChild(card);
             });
 
@@ -482,15 +541,29 @@
             const modalTitle = document.getElementById('modal-title');
             const modalDescription = document.getElementById('modal-description');
             const modalCloseBtn = document.getElementById('modal-close-btn');
-
+            const main = document.querySelector('main');
+            const nav = document.querySelector('nav');
+            
             function openModal(project) {
+                // Ensure any previous active modal is closed 
+                if (modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                }
+                
                 modalTitle.textContent = project.title;
                 modalDescription.textContent = project.description;
                 modal.classList.add('active');
+                // Optional: blur background for focus
+                main.classList.add('blur-sm');
+                nav.classList.add('blur-sm');
+                document.body.style.overflow = 'hidden';
             }
 
             function closeModal() {
                 modal.classList.remove('active');
+                main.classList.remove('blur-sm');
+                nav.classList.remove('blur-sm');
+                document.body.style.overflow = '';
             }
 
             modalCloseBtn.addEventListener('click', closeModal);
@@ -499,6 +572,14 @@
                     closeModal();
                 }
             });
+            
+            // Allow closing with ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
 
             // --- Данные для таймлайна ---
             const experiences = [
@@ -560,7 +641,3 @@
     </script>
 </body>
 </html>
-
-
-
-
