@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейс: Разработка АСУ и HMI для СПК107</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* bg-gray-50 */
+            color: #1f2937; /* text-gray-900 */
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-gray-900 border-b-4 border-blue-100 pb-2 mb-8;
+        }
+        .tag {
+            @apply px-3 py-1 text-xs font-semibold rounded-full;
+        }
+        .code-block {
+            @apply bg-gray-800 text-green-300 p-4 rounded-lg text-sm overflow-x-auto;
+        }
+        .screenshot-card {
+            @apply bg-white p-4 rounded-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигационная панель (простая) -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <a href="#" onclick="window.close()" class="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">← Назад к резюме</a>
+        </div>
+    </nav>
+
+    <!-- Основной контент кейса -->
+    <main class="container mx-auto px-4 py-12 md:py-16">
+        <div class="max-w-6xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100">
+
+            <header class="mb-12 text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-blue-500 mb-2">Кейс-стади</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Разработка АСУ и HMI для системы микроклимата птичника</h1>
+                <p class="mt-4 text-lg text-gray-600">Проектирование управляющей логики и человеко-машинного интерфейса на базе контроллера ОВЕН СПК107 (CodeSys).</p>
+                <div class="mt-6 flex justify-center space-x-3">
+                    <span class="tag bg-blue-100 text-blue-800">ПЛК ОВЕН</span>
+                    <span class="tag bg-blue-100 text-blue-800">CodeSys</span>
+                    <span class="tag bg-blue-100 text-blue-800">HMI Design</span>
+                    <span class="tag bg-blue-100 text-blue-800">Язык ST</span>
+                </div>
+            </header>
+
+            <!-- 1. Обзор проекта -->
+            <section class="mb-12">
+                <h2 class="section-title">Обзор проекта</h2>
+                <p class="text-lg text-gray-700">
+                    Данный проект представляет собой полный цикл разработки автоматизированной системы управления микроклиматом птичника. В связи с необходимостью повышения надежности и гибкости управления, было принято решение создать собственное решение на базе российского ПЛК ОВЕН СПК107 (CodeSys v3). Хотя проект не был внедрен в эксплуатацию из-за сжатых сроков заказчика, он демонстрирует глубокие компетенции в HMI-дизайне, программировании логики и понимании отраслевых требований.
+                </p>
+            </section>
+
+            <!-- 2. Скриншоты и Визуализация -->
+            <section class="mb-12">
+                <h2 class="section-title">Визуализация HMI</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Интерфейс был спроектирован с упором на интуитивность и удобство для оператора, позволяя легко контролировать состояние оборудования, видеть аварийные сигналы и настраивать ключевые параметры.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Главный экран (Мониторинг)</h4>
+                        <img src="https://i.ibb.co/L5rK5Qx/main.jpg" alt="Главный экран HMI" class="w-full h-auto rounded-lg shadow-md border border-gray-200">
+                        <p class="text-sm text-gray-600 mt-2">Отображение ключевых параметров (температура, влажность, статус вентиляции и обогрева).</p>
+                    </div>
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Настройка уставок</h4>
+                        <img src="https://i.ibb.co/hV75k5S/hid-t-inst.jpg" alt="Экран настроек уставок" class="w-full h-auto rounded-lg shadow-md border border-gray-200">
+                        <p class="text-sm text-gray-600 mt-2">Установка дневных/недельных режимов и предельных отклонений.</p>
+                    </div>
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Калибровка датчиков</h4>
+                        <img src="https://i.ibb.co/v45k4z5/hid-t-kalib.jpg" alt="Экран калибровки датчиков" class="w-full h-auto rounded-lg shadow-md border border-gray-200">
+                        <p class="text-sm text-gray-600 mt-2">Интерфейс для точной настройки и калибровки температурных датчиков (T1, T2, T3).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Техническая реализация -->
+            <section class="mb-12">
+                <h2 class="section-title">Техническая реализация</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-blue-600 mb-3">Логика ПЛК (CodeSys, ST)</h4>
+                        <p class="text-gray-700 mb-4">
+                            Вся управляющая логика была написана на языке ST (Structured Text) в среде CodeSys, обеспечивая чистоту кода, его читаемость и удобство сопровождения. Логика охватывала следующие модули:
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>**Управление климатом:** Модуль ПИД-регулирования для обогрева, алгоритмы ступенчатой вентиляции.</li>
+                            <li>**Обработка аварий:** Система немедленной сигнализации и защитного отключения (например, при перегреве или сбое датчиков).</li>
+                            <li>**Обработка ввода/вывода:** Маппинг и нормализация сигналов с аналоговых и дискретных входов.</li>
+                            <li>**Графическая часть:** Привязка внутренних переменных к элементам HMI.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-semibold text-blue-600 mb-3">Пример структуры I/O</h4>
+                        <p class="text-gray-700 mb-4">
+                            Структура ввода/вывода, определенная в проекте, демонстрирующая комплексное управление:
+                        </p>
+                        <pre class="code-block h-64">
+// Управляющие выходы (DO)
+DO_OBOREV_1: BOOL; // Обогреватель 1
+DO_VENT_GL: BOOL;  // Главная вентиляция
+DO_OKNO_1: INT;    // Положение окна 1 (аналог.)
+DO_ALARM_LAMP: BOOL; // Аварийная лампа
+
+// Входы (AI/DI)
+AI_TEMP_ZONE1: REAL; // Температура в Зоне 1
+DI_DOOR_LIMIT: BOOL; // Концевик двери
+DI_MOTOR_FAULT: BOOL; // Ошибка мотора
+AI_HUMIDITY: REAL;   // Влажность
+                        </pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Ключевые результаты и выводы -->
+            <section>
+                <h2 class="section-title">Результаты и выводы</h2>
+                <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-400">
+                    <h4 class="text-xl font-semibold text-blue-800 mb-3">Ключевой вклад:</h4>
+                    <p class="text-blue-700">
+                        Проект подтверждает способность к полному циклу разработки АСУ: от системного анализа требований и проектирования интерфейса (HMI) до низкоуровневого программирования ПЛК (ST). Этот навык критически важен для роли ведущего инженера, который должен не только обслуживать, но и создавать/модернизировать системы.
+                    </p>
+                </div>
+                <p class="mt-6 text-gray-700">
+                    Этот опыт лег в основу более сложного проекта по автоматизации бадьямойки Nieros, где знания в HMI и логике были успешно применены и внедрены.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>
