@@ -33,15 +33,6 @@
                 height: 500px;
             }
         }
-        .modal {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-        .modal.active {
-            display: flex;
-            opacity: 1;
-        }
         .timeline-item-dot {
             left: -0.5rem;
             transform: translateX(-50%);
@@ -292,7 +283,7 @@
         </div>
     </footer>
 
-    <!-- Модальное окно для проектов -->
+    <!-- Модальное окно БОЛЬШЕ НЕ ИСПОЛЬЗУЕТСЯ
     <div id="project-modal" class="modal fixed inset-0 bg-black bg-opacity-75 z-[100] flex items-center justify-center p-4">
         <div class="modal-content bg-white rounded-2xl shadow-xl p-8 max-w-2xl w-full relative m-4">
             <button id="modal-close-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl font-bold">&times;</button>
@@ -300,6 +291,7 @@
             <p id="modal-description" class="text-gray-700 whitespace-pre-line"></p>
         </div>
     </div>
+    -->
 
 
     <script>
@@ -409,57 +401,68 @@
                 {
                     id: 1,
                     title: 'Разработка и внедрение АСУ',
-                    description: 'Разработал систему управления микроклиматом на базе СПК107 (создание управляющей логики и графической визуализации).'
+                    description: 'Разработал систему управления микроклиматом на базе СПК107 (создание управляющей логики и графической визуализации).',
+                    link: 'keys_hid_49.html'
                 },
                 {
                     id: 2,
                     title: 'Модернизация оборудования',
-                    description: 'Провёл модернизацию системы аспирации, внедрив автоматическую логику управления для снижения энергозатрат и повышения эффективности.'
+                    description: 'Провёл модернизацию системы аспирации, внедрив автоматическую логику управления для снижения энергозатрат и повышения эффективности.',
+                    link: 'case_study_modernization.html'
                 },
                 {
                     id: 3,
                     title: 'Настройка ПЛК и приводов',
-                    description: 'Настроил частотный преобразователь Danfoss FC51 и ПЛК MCX06D для прецизионного регулирования микроклиматических параметров.'
+                    description: 'Настроил частотный преобразователь Danfoss FC51 и ПЛК MCX06D для прецизионного регулирования микроклиматических параметров.',
+                    link: 'case_study_danfoss.html'
                 },
                 {
                     id: 4,
                     title: 'Автоматизация тех. процессов',
-                    description: 'Самостоятельно создал программу на ПЛК UNITRONICS JZ20-31 (язык LD) для автоматизации санпропускника НС NEROS.'
+                    description: 'Самостоятельно создал программу на ПЛК UNITRONICS JZ20-31 (язык LD) для автоматизации санпропускника НС NEROS.',
+                    link: 'case_study_unitronics.html'
                 },
                 {
                     id: 5,
                     title: 'Восстановление и автоматизация бадьямойки Nieros',
-                    description: 'Выполнил полное восстановление промышленной моющей машины Nieros CL-K 2x200D. Произвел замену оригинального контроллера на ПЛК ОВЕН ПЛК110-60. Самостоятельно разработал и написал новую управляющую логику (на ST/LD), включая маппинг всех входов/выходов (DI/DO) и циклы мойки. Также составил подробную инструкцию по эксплуатации и лист возможных ошибок для персонала.'
+                    description: 'Выполнил полное восстановление промышленной моющей машины Nieros CL-K 2x200D. Произвел замену оригинального контроллера на ПЛК ОВЕН ПЛК110-60. Самостоятельно разработал и написал новую управляющую логику (на ST/LD), включая маппинг всех входов/выходов (DI/DO) и циклы мойки. Также составил подробную инструкцию по эксплуатации и лист возможных ошибок для персонала.',
+                    link: 'case_study_nieros.html'
                 },
                 {
                     id: 6,
                     title: 'Оптимизация производства (Ross 308)',
-                    description: 'Реализовал комплексную автоматизацию по стандартам Ross 308, что способствовало достижению максимального прироста веса и снижению падежа.'
+                    description: 'Реализовал комплексную автоматизацию по стандартам Ross 308, что способствовало достижению максимального прироста веса и снижению падежа.',
+                    link: 'case_study_ross308.html'
                 },
                 {
                     id: 7,
                     title: 'Цифровизация (Bitrix)',
-                    description: 'Внедрил и адаптировал Bitrix для производственного коллектива (провел обучение главного инженера, инженеров, мастеров, управляющего).'
+                    description: 'Внедрил и адаптировал Bitrix для производственного коллектива (провел обучение главного инженера, инженеров, мастеров, управляющего).',
+                    link: 'case_study_bitrix.html'
                 },
                 {
                     id: 8,
                     title: 'Цифровизация (Боты и аналитика)',
-                    description: 'Интегрировал Telegram-бота с Google Таблицами для автоматизации сбора, мониторинга и аналитики производственных данных.'
+                    description: 'Интегрировал Telegram-бота с Google Таблицами для автоматизации сбора, мониторинга и аналитики производственных данных.',
+                    link: 'case_study_bots.html'
                 },
                 {
                     id: 9,
                     title: 'Разработка ПО',
-                    description: 'Разработал функциональные приложения для внутреннего мониторинга, отчётности и контроля производственных показателей.'
+                    description: 'Разработал функциональные приложения для внутреннего мониторинга, отчётности и контроля производственных показателей.',
+                    link: 'case_study_software.html'
                 },
                 {
                     id: 10,
                     title: 'Обучение персонала',
-                    description: 'Проводил тренинги и практические обучения для зоотехников и новых инженеров АСУ. Вел обходы, практические консультации и разрабатывал инструкции.'
+                    description: 'Проводил тренинги и практические обучения для зоотехников и новых инженеров АСУ. Вел обходы, практические консультации и разрабатывал инструкции.',
+                    link: 'case_study_training.html'
                 },
                 {
                     id: 11,
                     title: 'Дизайн HMI и логика для СПК107',
-                    description: 'Разработал HMI-интерфейс (визуализацию) и управляющую логику для системы микроклимата на базе ОВЕН СПК107. Проект включал проработку экранов управления (главный, уставки, калибровка) и логику аварий, обогрева и вентиляции. Проект был подготовлен, но не внедрен на объекте из-за сжатых сроков.'
+                    description: 'Разработал HMI-интерфейс (визуализацию) и управляющую логику для системы микроклимата на базе ОВЕН СПК107. Проект включал проработку экранов управления (главный, уставки, калибровка) и логику аварий, обогрева и вентиляции. Проект был подготовлен, но не внедрен на объекте из-за сжатых сроков.',
+                    link: 'case_study_hmi.html'
                 }
             ];
 
@@ -469,12 +472,7 @@
                 const card = document.createElement('div');
                 card.className = 'bg-white p-6 rounded-2xl shadow-xl cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-1';
                 
-                // CRITICAL FIX: Make only the anchor tag click open the external link, 
-                // and the card body/title click open the modal, or the project page itself.
-                // Since the outer div is clickable, and the anchor is inside, we bind the external link logic
-                // to the anchor tag, and modal logic to the card's click event listener (excluding the anchor click)
-
-                let linkTarget = project.id === 1 ? 'keys_hid_49.html' : '#';
+                let linkTarget = project.link; // Используем новую ссылку из данных
                 
                 card.innerHTML = `
                     <h3 class="text-xl font-bold text-gray-900">${project.title}</h3>
@@ -484,101 +482,29 @@
                 
                 // Add event listener to the whole card
                 card.addEventListener('click', (e) => {
-                    
-                    // Check if the click originated from the anchor tag itself
+                    // Если клик был по ссылке, позволить ей открыться в новой вкладке
                     if (e.target.tagName === 'A') {
-                        // If it's an anchor, we let the anchor tag handle the navigation (if it has a real href)
-                        if (project.id === 1) {
-                            // For project ID 1, we prevent the card's general action and let the anchor's default navigation occur.
-                            // The anchor already has target="_blank" set below.
-                            return; 
-                        } else {
-                             // For all other projects, the anchor leads nowhere ('#'), so we open the modal.
-                             e.preventDefault(); 
-                             openModal(project);
-                        }
-                    } 
-                    
-                    e.preventDefault(); // Default click action on the card body/elements is usually to prevent text selection
-                    
-                    if (project.id === 1) {
-                        // For the special case where the user clicks the card body (not the anchor), 
-                        // we still want to navigate to the external link
-                        window.open(linkTarget, '_blank');
-                    } else {
-                        // For all other projects (ID != 1), open the modal
-                        openModal(project);
+                        return;
                     }
+                    
+                    // Если клик был по телу карточки, также открыть ссылку
+                    e.preventDefault();
+                    window.open(linkTarget, '_blank');
                 });
                 
-                // For project ID 1, we ensure the anchor tag itself uses target="_blank"
-                if (project.id === 1) {
-                    const anchor = card.querySelector('a');
-                    anchor.setAttribute('target', '_blank');
-                    
-                    // CRITICAL FIX: Since the card listener handles clicks on the anchor too (due to bubbling), 
-                    // we must ensure the anchor click bypasses the card's window.open logic and relies 
-                    // on native navigation, but the original intent was that clicking *anywhere* on the card 
-                    // (for project 1) opens the external link.
-                    
-                    // The simplest fix to ensure window.open fires when clicking the card body, 
-                    // AND when clicking the anchor, is to handle both via the card listener 
-                    // and just prevent propagation for the anchor to simplify the logic. 
-                    
-                    // Let's go with the previously simplified logic (which was likely correct) 
-                    // and re-verify the bug fix is applied cleanly:
-                    
-                    card.querySelector('a').addEventListener('click', (e) => {
-                        e.stopPropagation(); 
-                    });
-                }
+                // Установить target="_blank" для всех ссылок в карточках
+                const anchor = card.querySelector('a');
+                anchor.setAttribute('target', '_blank');
+                
+                // Остановить всплытие, чтобы клик по ссылке не вызывал клик по карточке
+                anchor.addEventListener('click', (e) => {
+                    e.stopPropagation(); 
+                });
                 
                 projectGrid.appendChild(card);
             });
 
-            // --- Логика модального окна ---
-            const modal = document.getElementById('project-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalDescription = document.getElementById('modal-description');
-            const modalCloseBtn = document.getElementById('modal-close-btn');
-            const main = document.querySelector('main');
-            const nav = document.querySelector('nav');
-            
-            function openModal(project) {
-                // Ensure any previous active modal is closed 
-                if (modal.classList.contains('active')) {
-                    modal.classList.remove('active');
-                }
-                
-                modalTitle.textContent = project.title;
-                modalDescription.textContent = project.description;
-                modal.classList.add('active');
-                // Optional: blur background for focus
-                main.classList.add('blur-sm');
-                nav.classList.add('blur-sm');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeModal() {
-                modal.classList.remove('active');
-                main.classList.remove('blur-sm');
-                nav.classList.remove('blur-sm');
-                document.body.style.overflow = '';
-            }
-
-            modalCloseBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-            
-            // Allow closing with ESC key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.classList.contains('active')) {
-                    closeModal();
-                }
-            });
+            // --- Логика модального окна (УДАЛЕНО) ---
 
 
             // --- Данные для таймлайна ---
@@ -641,3 +567,4 @@
     </script>
 </body>
 </html>
+
