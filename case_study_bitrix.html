@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейс: Внедрение Bitrix24</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* bg-gray-50 */
+            color: #1f2937; /* text-gray-900 */
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-gray-900 border-b-4 border-blue-100 pb-2 mb-8;
+        }
+        .tag {
+            @apply px-3 py-1 text-xs font-semibold rounded-full;
+        }
+        .code-block {
+            @apply bg-gray-800 text-green-300 p-4 rounded-lg text-sm overflow-x:auto;
+        }
+        .screenshot-card {
+            @apply bg-white p-4 rounded-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигационная панель (простая) -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <a href="#" onclick="window.close()" class="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">← Назад к резюме</a>
+        </div>
+    </nav>
+
+    <!-- Основной контент кейса -->
+    <main class="container mx-auto px-4 py-12 md:py-16">
+        <div class="max-w-6xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100">
+
+            <header class="mb-12 text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-blue-500 mb-2">Кейс-стади</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Цифровизация (Bitrix24)</h1>
+                <p class="mt-4 text-lg text-gray-600">Внедрение и адаптация CRM/ERP системы Bitrix24 для управления задачами производственного коллектива.</p>
+                <div class="mt-6 flex justify-center space-x-3">
+                    <span class="tag bg-blue-100 text-blue-800">Цифровизация</span>
+                    <span class="tag bg-blue-100 text-blue-800">Bitrix24</span>
+                    <span class="tag bg-blue-100 text-blue-800">Управление проектами</span>
+                    <span class="tag bg-blue-100 text-blue-800">Обучение персонала</span>
+                </div>
+            </header>
+
+            <!-- 1. Обзор проекта -->
+            <section class="mb-12">
+                <h2 class="section-title">Проблема</h2>
+                <p class="text-lg text-gray-700">
+                    Инженерная служба и производственные мастера работали в режиме "устных распоряжений" и коммуникации через разрозненные мессенджеры (WhatsApp, Viber). Это приводило к системным проблемам:
+                    <ul class="list-disc list-inside ml-4 mt-4 text-lg text-gray-700 space-y-2">
+                        <li><b>Потеря задач:</b> Устные просьбы забывались, сообщения в чатах "тонули" в потоке.</li>
+                        <li><b>Отсутствие контроля:</b> Руководителю (главному инженеру, управляющему) было сложно отследить, кто, что и когда должен был сделать.</li>
+                        <li><b>Непрозрачность:</b> Было неясно, на ком "зависла" задача и почему она не выполняется.</li>
+                        <li><b>"Перекладывание" ответственности:</b> Сложно найти ответственного за невыполненную или плохо выполненную работу.</li>
+                    </ul>
+                    <br>
+                    <b>Цель проекта:</b> Внедрить единую цифровую платформу для постановки, контроля и выполнения задач, повысив прозрачность и исполнительскую дисциплину.
+                </p>
+            </section>
+
+            <!-- 2. Решение и Реализация -->
+            <section class="mb-12">
+                <h2 class="section-title">Решение и Реализация</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    В качестве платформы был выбран Bitrix24. Моя роль заключалась не в "покупке" лицензии, а в полной "наземной" интеграции системы в консервативный производственный коллектив.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Администрирование портала</h4>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <span class="font-semibold block text-gray-700">Задача:</span>
+                            Подготовить "фундамент" системы.
+                            <br><br>
+                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <ul class="list-disc list-inside ml-1">
+                                <li>Создание организационной структуры компании в Bitrix24 (отделы, подразделения).</li>
+                                <li>Настройка прав доступа (кто может ставить задачи, кто может видеть задачи других отделов).</li>
+                                <li>Отключение ненужных модулей (CRM, Маркетинг), чтобы не перегружать интерфейс.</li>
+                                <li>Фокусировка на модулях "Задачи и Проекты" и "Календарь".</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Обучение и "Евангелизм"</h4>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <span class="font-semibold block text-gray-700">Задача:</span>
+                            Преодолеть сопротивление персонала и научить их пользоваться системой.
+                            <br><br>
+                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <ul class="list-disc list-inside ml-1">
+                                <li>Проведение групповых тренингов для ИТР (главный инженер, инженеры, мастера, управляющий).</li>
+                                <li>Разработка простого регламента: "Если задачи нет в Bitrix — задачи не существует".</li>
+                                <li>Индивидуальная помощь в установке мобильного приложения, настройке уведомлений.</li>
+                                <li>Личный пример: постановка всех задач (включая мелкие) только через Bitrix.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 3. Ключевые результаты и выводы -->
+            <section>
+                <h2 class="section-title">Результаты и выводы</h2>
+                <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-400">
+                    <h4 class="text-xl font-semibold text-blue-800 mb-3">Ключевой вклад:</h4>
+                    <p class="text-blue-700">
+                        Проект демонстрирует навыки "soft skills" и цифровизации, выходящие за рамки "железной" АСУ. Это способность менять рабочие процессы, обучать людей и внедрять цифровые инструменты управления, что является ключевой компетенцией для ведущего инженера и руководителя.
+                    </p>
+                </div>
+                <ul class="mt-6 list-disc list-inside space-y-2 text-green-700">
+                    <li><span class="font-semibold text-green-800">100% Прозрачность:</span> Руководство получило возможность в реальном времени видеть статус всех задач.</li>
+                    <li><span class="font-semibold text-green-800">Повышение дисциплины:</span> Задачи перестали "теряться". У каждой задачи появился ответственный и срок.</li>
+                    <li><span class="font-semibold text-green-800">Создание базы знаний:</span> Решения по типовым проблемам (например, "сломался насос Х") стали фиксироваться в комментариях к задачам, формируя базу знаний.</li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="border-t border-gray-200 bg-white mt-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500">
+            Этот проект является частью портфолио Людвига К.А.
+        </div>
+    </footer>
+
+</body>
+</html>

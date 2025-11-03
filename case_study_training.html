@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейс: Обучение персонала и Наставничество</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* bg-gray-50 */
+            color: #1f2937; /* text-gray-900 */
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-gray-900 border-b-4 border-blue-100 pb-2 mb-8;
+        }
+        .tag {
+            @apply px-3 py-1 text-xs font-semibold rounded-full;
+        }
+        .code-block {
+            @apply bg-gray-800 text-green-300 p-4 rounded-lg text-sm overflow-x:auto;
+        }
+        .screenshot-card {
+            @apply bg-white p-4 rounded-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигационная панель (простая) -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <a href="#" onclick="window.close()" class="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">← Назад к резюме</a>
+        </div>
+    </nav>
+
+    <!-- Основной контент кейса -->
+    <main class="container mx-auto px-4 py-12 md:py-16">
+        <div class="max-w-6xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100">
+
+            <header class="mb-12 text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-blue-500 mb-2">Кейс-стади</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Обучение персонала и Наставничество</h1>
+                <p class="mt-4 text-lg text-gray-600">Разработка инструкций и проведение тренингов для зоотехников и инженеров АСУ.</p>
+                <div class="mt-6 flex justify-center space-x-3">
+                    <span class="tag bg-blue-100 text-blue-800">Наставничество</span>
+                    <span class="tag bg-blue-100 text-blue-800">Разработка инструкций</span>
+                    <span class="tag bg-blue-100 text-blue-800">Soft Skills</span>
+                    <span class="tag bg-blue-100 text-blue-800">АСУ</span>
+                </div>
+            </header>
+
+            <!-- 1. Обзор проекта -->
+            <section class="mb-12">
+                <h2 class="section-title">Проблема</h2>
+                <p class="text-lg text-gray-700">
+                    Современные системы АСУ микроклиматом (BigDutchman, Fancom, DACS) являются сложным оборудованием. Было выявлено несколько проблем, связанных с человеческим фактором:
+                    <ul class="list-disc list-inside ml-4 mt-4 text-lg text-gray-700 space-y-2">
+                        <li><b>Ошибки операторов:</b> Зоотехники и мастера не всегда понимали логику работы контроллеров, что приводило к неверной установке параметров или игнорированию аварий.</li>
+                        <li><b>"Текучка" кадров:</b> Новые инженеры АСУ тратили недели на то, чтобы "въехать" в специфику работы оборудования на объекте.</li>
+                        <li><b>Отсутствие документации:</b> Существующие инструкции были либо "заводскими" (сложными и на английском), либо отсутствовали вовсе.</li>
+                    </ul>
+                    <br>
+                    <b>Цель проекта:</b> Систематизировать знания, создать базу простых и понятных инструкций, и наладить процесс обучения новых и существующих сотрудников.
+                </p>
+            </section>
+
+            <!-- 2. Решение и Реализация -->
+            <section class="mb-12">
+                <h2 class="section-title">Решение и Реализация</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Был применен комплексный подход, сочетающий создание "бумажных" инструкций с "полевым" обучением.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Разработка документации</h4>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <span class="font-semibold block text-gray-700">Задача:</span>
+                            Создать простые, понятные и доступные инструкции для персонала.
+                            <br><br>
+                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <ul class="list-disc list-inside ml-1">
+                                <li><b>"Листы ошибок":</b> По аналогии с проектом бадьямойки Nieros, создание документов "Что делать, если...". (Напр., "Мигает красная лампа на Viper Touch", "Ошибка 'Sensor Failure'").</li>
+                                <li><b>Чек-листы:</b> Разработка чек-листов для зоотехников (ежедневный обход, проверка уставок).</li>
+                                <li><b>Инструкции по настройке:</b> Пошаговые гайды по настройке кривых вентиляции и отопления.</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Практическое обучение ("В полях")</h4>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <span class="font-semibold block text-gray-700">Задача:</span>
+                            Научить инженеров и зоотехников не бояться оборудования и правильно с ним работать.
+                            <br><br>
+                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <ul class="list-disc list-inside ml-1">
+                                <li><b>Регулярные обходы:</b> Совместные обходы птичников с зоотехниками с объяснением "на пальцах", почему система работает так, а не иначе.</li>
+                                <li><b>Наставничество:</b> "Погружение" новых инженеров АСУ, передача знаний по поиску неисправностей, чтению схем, специфике контроллеров.</li>
+                                <li><b>Проведение тренингов:</b> Групповые сессии по новым функциям или разбору частых ошибок.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Ключевые результаты и выводы -->
+            <section>
+                <h2 class="section-title">Результаты и выводы</h2>
+                <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-400">
+                    <h4 class="text-xl font-semibold text-blue-800 mb-3">Ключевой вклад:</h4>
+                    <p class="text-blue-700">
+                        Этот проект подчеркивает компетенции ведущего инженера как наставника и методолога. Успешная автоматизация — это не только работающее "железо", но и обученный персонал, который может его правильно эксплуатировать. Этот опыт доказывает способность развивать команду и создавать устойчивые рабочие процессы.
+                    </p>
+                </div>
+                <ul class="mt-6 list-disc list-inside space-y-2 text-green-700">
+                    <li><span class="font-semibold text-green-800">Снижение ошибок:</span> Значительно уменьшилось число сбоев, вызванных "человеческим фактором".</li>
+                    <li><span class="font-semibold text-green-800">Быстрая адаптация:</span> Новые инженеры АСУ быстрее входили в курс дела.</li>
+                    <li><span class="font-semibold text-green-800">Повышение вовлеченности:</span> Зоотехники стали лучше понимать, как их действия влияют на микроклимат, и начали более осознанно подходить к настройкам.</li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="border-t border-gray-200 bg-white mt-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500">
+            Этот проект является частью портфолио Людвига К.А.
+        </div>
+    </footer>
+
+</body>
+</html>
