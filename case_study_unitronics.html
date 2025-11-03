@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейс: Автоматизация санпропускника NEROS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* bg-gray-50 */
+            color: #1f2937; /* text-gray-900 */
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-gray-900 border-b-4 border-blue-100 pb-2 mb-8;
+        }
+        .tag {
+            @apply px-3 py-1 text-xs font-semibold rounded-full;
+        }
+        .code-block {
+            @apply bg-gray-800 text-green-300 p-4 rounded-lg text-sm overflow-x:auto;
+        }
+        .screenshot-card {
+            @apply bg-white p-4 rounded-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигационная панель (простая) -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <a href="#" onclick="window.close()" class="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">← Назад к резюме</a>
+        </div>
+    </nav>
+
+    <!-- Основной контент кейса -->
+    <main class="container mx-auto px-4 py-12 md:py-16">
+        <div class="max-w-6xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100">
+
+            <header class="mb-12 text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-blue-500 mb-2">Кейс-стади</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Автоматизация санпропускника НС NEROS</h1>
+                <p class="mt-4 text-lg text-gray-600">Самостоятельная разработка логики на ПЛК UNITRONICS JZ20-31 для управления гигиеническим шлюзом.</p>
+                <div class="mt-6 flex justify-center space-x-3">
+                    <span class="tag bg-blue-100 text-blue-800">UNITRONICS JZ20-31</span>
+                    <span class="tag bg-blue-100 text-blue-800">Ladder Logic (LD)</span>
+                    <span class="tag bg-blue-100 text-blue-800">Автоматизация</span>
+                    <span class="tag bg-blue-100 text-blue-800">КИПиА</span>
+                </div>
+            </header>
+
+            <!-- 1. Обзор проекта -->
+            <section class="mb-12">
+                <h2 class="section-title">Обзор проекта</h2>
+                <p class="text-lg text-gray-700">
+                    Санпропускник NEROS на входе в "чистую зону" производства работал некорректно / в ручном режиме. Это создавало риски нарушения санитарных норм и приводило к задержкам при проходе персонала. Задача состояла в том, чтобы полностью автоматизировать его работу, используя имеющийся в наличии ПЛК UNITRONICS JZ20-31.
+                </p>
+            </section>
+
+            <!-- 2. Компоненты и Задачи -->
+            <section class="mb-12">
+                <h2 class="section-title">Компоненты и Задачи</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Проект включал в себя реверс-инжиниринг работы механики санпропускника и программирование ПЛК с нуля.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Анализ и Подключение</h4>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <span class="font-semibold block text-gray-700">Задача:</span>
+                            Изучить логику работы санпропускника и подключить все датчики и исполнительные механизмы.
+                            <br><br>
+                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <ul class="list-disc list-inside ml-1">
+                                <li>Идентификация датчиков (оптические датчики рук, датчик турникета).</li>
+                                <li>Подключение исполнительных механизмов (подача дез. средства, управление турникетом).</li>
+                                <li>Физический монтаж и подключение ПЛК UNITRONICS в шкаф управления.</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Программирование Логики (LD)</h4>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <span class="font-semibold block text-gray-700">Задача:</span>
+                            Написать программу на Ladder Logic (LD) для реализации требуемого цикла работы.
+                            <br><br>
+                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <ul class="list-disc list-inside ml-1">
+                                <li>Создание программы в ПО U90 Ladder.</li>
+                                <li>Реализация таймеров для дозирования дез. средства.</li>
+                                <li>Программирование пошагового алгоритма (вход -> дезинфекция -> разблокировка турникета).</li>
+                                <li>Настройка HMI (встроенный дисплей ПЛК) для индикации статуса.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Техническая реализация -->
+            <section class="mb-12">
+                <h2 class="section-title">Техническая реализация</h2>
+                <div class="grid grid-cols-1">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-blue-600 mb-3">Алгоритм работы (Язык LD)</h4>
+                        <p class="text-gray-700 mb-4">
+                            Логика работы была реализована на языке релейных диаграмм (LD), который идеально подходит для таких пошаговых задач:
+                        </p>
+                        <pre class="code-block h-64">
+| |
+|---[ ]---|---[ ]---|----(SET)----|
+|  DI_Hands_In  |  NOT_Block  |  DO_Dez_Pump  |  (Подать дез. средство)
+| |
+| |
+|---[ ]---|----(TMR)----|
+|  DO_Dez_Pump  |  T_Dez_Time  |  (Таймер дезинфекции 3 сек)
+| |   ( 3s )  |
+| |
+|---[ ]---|---[ ]---|----(SET)----|
+|  T_Dez_Time   |  NOT_Block  |  DO_Turniket  |  (Разблокировать турникет)
+| |
+| |
+|---[ ]---|----(RST)----|
+|  DI_Turniket  |  DO_Dez_Pump  |  (Сброс при проходе)
+| |
+| |---[ ]---|----(RST)----|
+|  DI_Turniket  |  DO_Turniket  |
+| |
+
+(Это упрощенный пример логики)
+                        </pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Ключевые результаты и выводы -->
+            <section>
+                <h2 class="section-title">Результаты и выводы</h2>
+                <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-400">
+                    <h4 class="text-xl font-semibold text-blue-800 mb-3">Ключевой вклад:</h4>
+                    <p class="text-blue-700">
+                        Самостоятельное решение задачи автоматизации "под ключ" на нетипичном для основной работы оборудовании (UNITRONICS). Проект демонстрирует гибкость, умение быстро осваивать новое ПО (U90 Ladder) и языки (LD), а также находить эффективные решения для локальных производственных задач.
+                    </p>
+                </div>
+                <ul class="mt-6 list-disc list-inside space-y-2 text-green-700">
+                    <li><span class="font-semibold text-green-800">Повышение уровня гигиены:</span> Гарантированный цикл дезинфекции рук для всего персонала, входящего в "чистую зону".</li>
+                    <li><span class="font-semibold text-green-800">Автоматизация процесса:</span> Исключен человеческий фактор и ручное управление, ускорен проход персонала.</li>
+                    <li><span class="font-semibold text-green-800">Расширение компетенций:</span> Получен успешный опыт программирования ПЛК UNITRONICS, что доказывает способность работать с контроллерами различных производителей.</li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="border-t border-gray-200 bg-white mt-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500">
+            Этот проект является частью портфолио Людвига К.А.
+        </div>
+    </footer>
+
+</body>
+</html>
