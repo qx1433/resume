@@ -9,10 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: "Warm Neutral" (bg-gray-50, text-gray-800, accent: text-blue-600) -->
-    <!-- Application Structure Plan: Выбрана структура SPA-портфолио с липкой верхней навигацией (Главная, Навыки, ИИ-Навыки, Проекты, Опыт) для интуитивного перемещения. Это позволяет пользователю (рекрутеру) либо линейно прокручивать страницу, либо сразу переходить к интересующему разделу. Главный экран представляет кандидата. Раздел "Навыки" использует радарную диаграмму для быстрой оценки ключевых компетенций (Автоматизация, ПЛК, Цифровизация). Новый раздел "ИИ-Навыки" детализирует компетенции в цифровизации. "Проекты" реализованы в виде интерактивной сетки карточек, раскрывающих детали по клику. "Опыт" представлен в виде вертикальной временной шкалы для наглядной демонстрации карьерного роста. -->
-    <!-- Visualization & Content Choices: 1. Компетенции (Из "Технические компетенции", "IT", "Отраслевая"): Goal: Информировать/Сравнить. Viz: Радарная диаграмма (Chart.js/Canvas) для визуальной оценки баланса навыков (АСУ, ПЛК, Цифровизация) и текстовые списки. Interaction: Визуализация данных. 2. ИИ-Навыки: Goal: Информировать. Viz: Сетка карточек (HTML/Tailwind) для детализации новых навыков. 3. Проектный опыт: Goal: Организовать/Информировать. Viz: Сетка карточек (HTML/Tailwind). Interaction: JS-модальное окно по клику. 4. Опыт работы: Goal: Показать изменение/хронологию. Viz: Вертикальная "таймлайн" (HTML/Tailwind). - Подтверждено: NO SVG/Mermaid. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -47,7 +43,6 @@
 </head>
 <body class="bg-gray-50">
 
-    <!-- Навигация -->
     <nav class="sticky top-0 bg-white shadow-sm z-50 border-b border-gray-200">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -90,20 +85,16 @@
         </div>
     </nav>
 
-    <!-- Основной контент -->
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-        <!-- Секция 1: Главная -->
         <section id="home" class="py-16 md:py-24">
             <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 lg:gap-16">
-                <!-- Image Column -->
                 <div class="flex-shrink-0">
                     <img src="https://qx1433.github.io/resume/image1.jpg?text=ЛКА" 
-                         alt="Фото Людвиг Константин Анатольевич" 
-                         class="rounded-full w-48 h-48 md:w-64 md:h-64 object-cover shadow-xl mx-auto border-4 border-white">
+                            alt="Фото Людвиг Константин Анатольевич" 
+                            class="rounded-full w-48 h-48 md:w-64 md:h-64 object-cover shadow-xl mx-auto border-4 border-white">
                 </div>
                 
-                <!-- Text Column -->
                 <div class="text-center md:text-left">
                     <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">Людвиг Константин Анатольевич</h1>
                     <p class="mt-4 text-xl md:text-2xl font-semibold text-blue-600">Ведущий инженер по автоматизации, микроклимату и цифровизации</p>
@@ -131,7 +122,6 @@
             </div>
         </section>
 
-        <!-- Секция 2: Навыки -->
         <section id="skills" class="py-16 md:py-24 bg-white rounded-2xl shadow-xl overflow-hidden">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900">Ключевые компетенции</h2>
@@ -172,7 +162,7 @@
                             <h3 class="text-xl font-semibold text-blue-600">Отраслевая экспертиза (Птицеводство)</h3>
                             <ul class="mt-3 list-disc list-inside space-y-1 text-gray-700">
                                 <li>Глубокое понимание техпроцессов выращивания бройлеров</li>
-                                <li>Оптимизация условий для повышения продуктивности</li>
+                                
                                 <li>Автоматизация кормления, поения и вентиляции</li>
                             </ul>
                         </div>
@@ -181,7 +171,6 @@
             </div>
         </section>
         
-        <!-- Секция 3: ИИ-Навыки -->
         <section id="ai-skills" class="py-16 md:py-24">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900">Компетенции в ИИ и Цифровизации</h2>
             <p class="mt-4 text-lg text-gray-600 text-center max-w-2xl mx-auto">
@@ -203,7 +192,6 @@
             </div>
         </section>
 
-        <!-- Секция 4: Проекты -->
         <section id="projects" class="py-16 md:py-24 bg-white rounded-2xl shadow-xl overflow-hidden">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900">Ключевые проекты</h2>
             <p class="mt-4 text-lg text-gray-600 text-center max-w-2xl mx-auto">
@@ -213,7 +201,6 @@
             </div>
         </section>
 
-        <!-- Секция 5: Опыт работы -->
         <section id="experience" class="py-16 md:py-24">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900">Опыт работы</h2>
             <p class="mt-4 text-lg text-gray-600 text-center max-w-2xl mx-auto">
@@ -225,7 +212,6 @@
             </div>
         </section>
 
-        <!-- Секция 6: Образование и P.S. -->
         <section id="education" class="py-16 md:py-24">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900">Образование и P.S.</h2>
             <div class="mt-12 max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
@@ -276,23 +262,11 @@
 
     </main>
 
-    <!-- Футер -->
     <footer class="border-t border-gray-200 bg-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500">
             Интерактивное резюме создано на базе предоставленных данных.
         </div>
     </footer>
-
-    <!-- Модальное окно БОЛЬШЕ НЕ ИСПОЛЬЗУЕТСЯ
-    <div id="project-modal" class="modal fixed inset-0 bg-black bg-opacity-75 z-[100] flex items-center justify-center p-4">
-        <div class="modal-content bg-white rounded-2xl shadow-xl p-8 max-w-2xl w-full relative m-4">
-            <button id="modal-close-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl font-bold">&times;</button>
-            <h3 id="modal-title" class="text-2xl font-bold text-gray-900 mb-4"></h3>
-            <p id="modal-description" class="text-gray-700 whitespace-pre-line"></p>
-        </div>
-    </div>
-    -->
-
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -428,12 +402,7 @@
                     description: 'Выполнил полное восстановление промышленной моющей машины Nieros CL-K 2x200D. Произвел замену оригинального контроллера на ПЛК ОВЕН ПЛК110-60. Самостоятельно разработал и написал новую управляющую логику (на ST/LD), включая маппинг всех входов/выходов (DI/DO) и циклы мойки. Также составил подробную инструкцию по эксплуатации и лист возможных ошибок для персонала.',
                     link: 'case_study_nieros.html'
                 },
-                {
-                    id: 6,
-                    title: 'Оптимизация производства (Ross 308)',
-                    description: 'Реализовал комплексную автоматизацию по стандартам Ross 308, что способствовало достижению максимального прироста веса и снижению падежа.',
-                    link: 'case_study_ross308.html'
-                },
+                
                 {
                     id: 7,
                     title: 'Цифровизация (Bitrix)',
@@ -446,24 +415,14 @@
                     description: 'Интегрировал Telegram-бота с Google Таблицами для автоматизации сбора, мониторинга и аналитики производственных данных.',
                     link: 'case_study_bots.html'
                 },
-                {
-                    id: 9,
-                    title: 'Разработка ПО',
-                    description: 'Разработал функциональные приложения для внутреннего мониторинга, отчётности и контроля производственных показателей.',
-                    link: 'case_study_software.html'
-                },
+                
                 {
                     id: 10,
                     title: 'Обучение персонала',
                     description: 'Проводил тренинги и практические обучения для зоотехников и новых инженеров АСУ. Вел обходы, практические консультации и разрабатывал инструкции.',
                     link: 'case_study_training.html'
-                },
-                {
-                    id: 11,
-                    title: 'Дизайн HMI и логика для СПК107',
-                    description: 'Разработал HMI-интерфейс (визуализацию) и управляющую логику для системы микроклимата на базе ОВЕН СПК107. Проект включал проработку экранов управления (главный, уставки, калибровка) и логику аварий, обогрева и вентиляции. Проект был подготовлен, но не внедрен на объекте из-за сжатых сроков.',
-                    link: 'case_study_hmi.html'
                 }
+                
             ];
 
             // --- Заполнение сетки проектов ---
@@ -567,5 +526,3 @@
     </script>
 </body>
 </html>
-
-
