@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейс: Диагностика освещения Swing 20</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* bg-gray-50 */
+            color: #1f2937; /* text-gray-900 */
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-gray-900 border-b-4 border-blue-100 pb-2 mb-8;
+        }
+        .tag {
+            @apply px-3 py-1 text-xs font-semibold rounded-full;
+        }
+        .code-block {
+            @apply bg-gray-800 text-gray-200 p-4 rounded-lg text-sm overflow-x:auto;
+        }
+        .screenshot-card {
+            @apply bg-white p-4 rounded-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигационная панель (простая) -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+             <a href="interactive_resume_ludwig_ka.html" class="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">← Назад к резюме</a>
+        </div>
+    </nav>
+
+    <!-- Основной контент кейса -->
+    <main class="container mx-auto px-4 py-12 md:py-16">
+        <div class="max-w-6xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100">
+
+            <header class="mb-12 text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-blue-500 mb-2">Кейс-стади</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Диагностика системы освещения Swing 20</h1>
+                <p class="mt-4 text-lg text-gray-600">Поиск и устранение системной ошибки монтажа, которую все считали "нормальной работой оборудования".</p>
+                <div class="mt-6 flex justify-center space-x-3">
+                    <span class="tag bg-blue-100 text-blue-800">Диагностика</span>
+                    <span class="tag bg-blue-100 text-blue-800">КИПиА</span>
+                    <span class="tag bg-blue-100 text-blue-800">Управление освещением</span>
+                    <span class="tag bg-blue-100 text-blue-800">Soft Skills</span>
+                </div>
+            </header>
+
+            <!-- 1. Обзор проекта -->
+            <section class="mb-12">
+                <h2 class="section-title">Проблема ("Так было всегда")</h2>
+                <p class="text-lg text-gray-700">
+                    На производстве (20 корпусов, 120х16 метров каждый) использовались диммируемые лампы Swing 20. Была поставлена задача — обеспечить плавное снижение освещения до минимальных значений (менее 23 Люкс) для соблюдения светового режима птицы.
+                </p>
+                <p class="text-lg text-gray-700 mt-4">
+                    При попытке диммирования система корректно снижала яркость только до 23 Люкс, а при дальнейшей попытке понижения — просто выключалась. Все сотрудники, включая руководство, утверждали, что "так и было всегда" и "это нормальная работа" данной системы.
+                </p>
+                <p class="text-lg text-gray-700 mt-4">
+                    <b>Задача:</b> Найти истинную причину, почему диммирование не работает в полном диапазоне, вопреки общепринятому мнению.
+                </p>
+            </section>
+
+            <!-- 2. Решение и Реализация -->
+            <section class="mb-12">
+                <h2 class="section-title">Процесс расследования</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Вместо того чтобы принять проблему как данность, я начал системную проверку всей цепи управления освещением.
+                </p>
+                <div class="space-y-6">
+                    <div class="screenshot-card p-6">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Этап 1: Проверка логики (ПО)</h4>
+                        <p class="text-gray-700">
+                            Первоначальная проверка контроллера (BigDutchman/DACS) показала, что управляющий сигнал (0-10В) отправляется корректно. Программная часть работала без ошибок.
+                        </p>
+                    </div>
+                    
+                    <div class="screenshot-card p-6">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Этап 2: Проверка документации и монтажа</h4>
+                        <p class="text-gray-700">
+                            Я изучил техническую документацию на лампы Swing 20 и обнаружил, что они *должны* поддерживать плавное диммирование во всем диапазоне. Это означало, что проблема была не в оборудовании, а в его подключении.
+                        </p>
+                        <p class="text-gray-700 mt-2">
+                            Была инициирована физическая проверка монтажа.
+                        </p>
+                    </div>
+
+                    <div class="screenshot-card p-6">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Этап 3: Обнаружение ошибки ("Найти истину")</h4>
+                        <p class="text-gray-700">
+                            Вскрытие и проверка расключения ламп на управляющей плате показали, что монтаж был выполнен с системной ошибкой. Провода управления были подключены некорректно, что и приводило к срыву диммирования на низких значениях.
+                        </p>
+                    </div>
+                    
+                    <div class="screenshot-card p-6">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Этап 4: Реализация исправления</h4>
+                        <p class="text-gray-700">
+                            Я организовал и проконтролировал работу дежурных электриков по пере-расключению всех ламп во всех 20 корпусах птичника.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 3. Ключевые результаты и выводы -->
+            <section>
+                <h2 class="section-title">Результаты и выводы</h2>
+                <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-400">
+                    <h4 class="text-xl font-semibold text-blue-800 mb-3">Ключевой вклад:</h4>
+                    <p class="text-blue-700">
+                        Как отметил генеральный директор, это была способность "из любого говна найти истину". Проект демонстрирует настойчивость, системный подход к диагностике и отказ принимать на веру "так было всегда". Это навык поиска первопричины проблемы, а не борьбы со следствием.
+                    </p>
+                </div>
+                <ul class="mt-6 list-disc list-inside space-y-2 text-green-700">
+                    <li><span class="font-semibold text-green-800">Функционал восстановлен:</span> Достигнуто плавное диммирование во всем диапазоне, что позволило соблюдать световой режим.</li>
+                    <li><span class="font-semibold text-green-800">Экономия:</span> Исправлена ошибка, приводившая к неэффективной работе освещения.</li>
+                    <li><span class="font-semibold text-green-800">Устранена системная ошибка:</span> Проблема, которую считали "нормой", была найдена и устранена во всем производственном комплексе (20 корпусов).</li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="border-t border-gray-200 bg-white mt-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500">
+            Этот проект является частью портфолио Людвига К.А.
+        </div>
+    </footer>
+
+</body>
+</html>
