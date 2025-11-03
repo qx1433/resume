@@ -20,6 +20,7 @@
             @apply px-3 py-1 text-xs font-semibold rounded-full;
         }
         .code-block {
+            /* Убрана фиксированная высота, чтобы блок мог расширяться */
             @apply bg-gray-800 text-green-300 p-4 rounded-lg text-sm overflow-x:auto;
         }
         .screenshot-card {
@@ -32,7 +33,7 @@
     <!-- Навигационная панель (простая) -->
     <nav class="bg-white shadow-md">
         <div class="container mx-auto px-4 py-4">
-            <a href="#" onclick="window.close()" class="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">← Назад к резюме</a>
+             <a href="https://qx1433.github.io/resume/" class="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">← Назад к резюме</a>
         </div>
     </nav>
 
@@ -42,11 +43,11 @@
 
             <header class="mb-12 text-center">
                 <p class="text-sm font-semibold uppercase tracking-wider text-blue-500 mb-2">Кейс-стади</p>
-                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Автоматизация санпропускника НС NEROS</h1>
-                <p class="mt-4 text-lg text-gray-600">Самостоятельная разработка логики на ПЛК UNITRONICS JZ20-31 для управления гигиеническим шлюзом.</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Автоматизация санпропускника NEROS</h1>
+                <p class="mt-4 text-lg text-gray-600">Самостоятельная разработка программы управления для санпропускника на ПЛК UNITRONICS JZ20-31.</p>
                 <div class="mt-6 flex justify-center space-x-3">
-                    <span class="tag bg-blue-100 text-blue-800">UNITRONICS JZ20-31</span>
-                    <span class="tag bg-blue-100 text-blue-800">Ladder Logic (LD)</span>
+                    <span class="tag bg-blue-100 text-blue-800">ПЛК UNITRONICS</span>
+                    <span class="tag bg-blue-100 text-blue-800">Язык LD</span>
                     <span class="tag bg-blue-100 text-blue-800">Автоматизация</span>
                     <span class="tag bg-blue-100 text-blue-800">КИПиА</span>
                 </div>
@@ -54,100 +55,88 @@
 
             <!-- 1. Обзор проекта -->
             <section class="mb-12">
-                <h2 class="section-title">Обзор проекта</h2>
+                <h2 class="section-title">Задача</h2>
                 <p class="text-lg text-gray-700">
-                    Санпропускник NEROS на входе в "чистую зону" производства работал некорректно / в ручном режиме. Это создавало риски нарушения санитарных норм и приводило к задержкам при проходе персонала. Задача состояла в том, чтобы полностью автоматизировать его работу, используя имеющийся в наличии ПЛК UNITRONICS JZ20-31.
+                    Санпропускник NIEROS, отвечающий за дезинфекцию рук и обуви персонала перед входом в чистую зону, работал некорректно. Требовалось быстро разработать и внедрить собственную, надежную программу управления, используя имеющийся на борту ПЛК UNITRONICS JZ20-31.
                 </p>
             </section>
 
-            <!-- 2. Компоненты и Задачи -->
+            <!-- 2. Визуальные материалы -->
             <section class="mb-12">
-                <h2 class="section-title">Компоненты и Задачи</h2>
-                <p class="text-lg text-gray-700 mb-6">
-                    Проект включал в себя реверс-инжиниринг работы механики санпропускника и программирование ПЛК с нуля.
-                </p>
+                <h2 class="section-title">Визуальные материалы</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="screenshot-card">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Анализ и Подключение</h4>
-                        <p class="text-sm text-gray-600 mt-2">
-                            <span class="font-semibold block text-gray-700">Задача:</span>
-                            Изучить логику работы санпропускника и подключить все датчики и исполнительные механизмы.
-                            <br><br>
-                            <span class="font-semibold block text-gray-700">Действия:</span>
-                            <ul class="list-disc list-inside ml-1">
-                                <li>Идентификация датчиков (оптические датчики рук, датчик турникета).</li>
-                                <li>Подключение исполнительных механизмов (подача дез. средства, управление турникетом).</li>
-                                <li>Физический монтаж и подключение ПЛК UNITRONICS в шкаф управления.</li>
-                            </ul>
-                        </p>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">ПЛК Unitronics JZ20-31</h4>
+                        <img src="https://qx1433.github.io/resume/unitronics_plk.jpg" alt="ПЛК UNITRONICS JZ20-31" class="w-full h-auto rounded-lg shadow-md border border-gray-200" onerror="this.src='https://placehold.co/600x400/e0e7ff/3b82f6?text=Фото+ПЛК+Unitronics'">
+                        <p class="text-sm text-gray-600 mt-2">Контроллер, на базе которого была реализована новая логика управления.</p>
                     </div>
                     <div class="screenshot-card">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Программирование Логики (LD)</h4>
-                        <p class="text-sm text-gray-600 mt-2">
-                            <span class="font-semibold block text-gray-700">Задача:</span>
-                            Написать программу на Ladder Logic (LD) для реализации требуемого цикла работы.
-                            <br><br>
-                            <span class="font-semibold block text-gray-700">Действия:</span>
-                            <ul class="list-disc list-inside ml-1">
-                                <li>Создание программы в ПО U90 Ladder.</li>
-                                <li>Реализация таймеров для дозирования дез. средства.</li>
-                                <li>Программирование пошагового алгоритма (вход -> дезинфекция -> разблокировка турникета).</li>
-                                <li>Настройка HMI (встроенный дисплей ПЛК) для индикации статуса.</li>
-                            </ul>
-                        </p>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Санпропускник NEROS</h4>
+                        <img src="https://qx1433.github.io/resume/neros_sanpropusk.jpg" alt="Санпропускник NEROS" class="w-full h-auto rounded-lg shadow-md border border-gray-200" onerror="this.src='https://placehold.co/600x400/e0e7ff/3b82f6?text=Фото+Санпропускника+NEROS'">
+                        <p class="text-sm text-gray-600 mt-2">Оборудование, которое было автоматизировано.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- 3. Техническая реализация -->
+            <!-- 3. Решение и Реализация -->
             <section class="mb-12">
-                <h2 class="section-title">Техническая реализация</h2>
-                <div class="grid grid-cols-1">
+                <h2 class="section-title">Решение и Реализация</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Проект был выполнен "под ключ": от анализа логики работы оборудования до программирования и внедрения.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                        <h4 class="text-2xl font-semibold text-blue-600 mb-3">Алгоритм работы (Язык LD)</h4>
+                        <h4 class="text-2xl font-semibold text-blue-600 mb-3">Программирование логики (LD)</h4>
                         <p class="text-gray-700 mb-4">
-                            Логика работы была реализована на языке релейных диаграмм (LD), который идеально подходит для таких пошаговых задач:
+                            Вся логика была реализована "с нуля" на языке LD (Ladder Diagram) в среде разработки Unitronics.
                         </p>
-                        <pre class="code-block h-64">
-| |
-|---[ ]---|---[ ]---|----(SET)----|
-|  DI_Hands_In  |  NOT_Block  |  DO_Dez_Pump  |  (Подать дез. средство)
-| |
-| |
-|---[ ]---|----(TMR)----|
-|  DO_Dez_Pump  |  T_Dez_Time  |  (Таймер дезинфекции 3 сек)
-| |   ( 3s )  |
-| |
-|---[ ]---|---[ ]---|----(SET)----|
-|  T_Dez_Time   |  NOT_Block  |  DO_Turniket  |  (Разблокировать турникет)
-| |
-| |
-|---[ ]---|----(RST)----|
-|  DI_Turniket  |  DO_Dez_Pump  |  (Сброс при проходе)
-| |
-| |---[ ]---|----(RST)----|
-|  DI_Turniket  |  DO_Turniket  |
-| |
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><b>Логика входа:</b> Реализован пошаговый алгоритм: активация мойки обуви -> подача дезинфицирующего средства на руки -> разблокировка турникета.</li>
+                            <li><b>Управление таймерами:</b> Настроены точные таймеры для каждого этапа (например, 3 секунды на дезинфекцию рук), чтобы обеспечить соответствие санитарным нормам.</li>
+                            <li><b>Обработка датчиков:</b> Программа корректно обрабатывала сигналы с фотодатчиков (наличие рук) и датчиков турникета.</li>
+                            <li><b>Блокировки:</b> Турникет не срабатывал, пока не будут выполнены все предыдущие шаги цикла.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-semibold text-blue-600 mb-3">Пример логики (Язык LD)</h4>
+                        <p class="text-gray-700 mb-4">
+                            Фрагмент, демонстрирующий логику таймера и разблокировки:
+                        </p>
+                        <!-- Блок кода без фиксированной высоты (h-64) -->
+                        <pre class="code-block">
+(*
+Network 3: Активация таймера дезинфекции
++----[ ]----+----[ ]----+----(T)----+
+|  Датчик   |  Клапан   |  Таймер   |
+|   Рук     |  Подачи   |  T1 (3c)  |
+|  (I_Hand) | (O_Valve) | (T_Desinf)|
++-----------+-----------+-----------+
 
-(Это упрощенный пример логики)
+Network 4: Разблокировка турникета
++----[ ]----+----[ ]----+----( )----+
+|  Таймер   |  Датчик   | Турникет  |
+|   T1      | Обуви     | (O_Turn)  |
+| (T_Desinf)| (I_Shoe)  |           |
++-----------+-----------+-----------+
+*)
                         </pre>
                     </div>
                 </div>
             </section>
-
+            
             <!-- 4. Ключевые результаты и выводы -->
             <section>
                 <h2 class="section-title">Результаты и выводы</h2>
                 <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-400">
                     <h4 class="text-xl font-semibold text-blue-800 mb-3">Ключевой вклад:</h4>
                     <p class="text-blue-700">
-                        Самостоятельное решение задачи автоматизации "под ключ" на нетипичном для основной работы оборудовании (UNITRONICS). Проект демонстрирует гибкость, умение быстро осваивать новое ПО (U90 Ladder) и языки (LD), а также находить эффективные решения для локальных производственных задач.
+                        Проект показывает способность быстро осваивать новое оборудование (ПЛК Unitronics) и среды программирования (U90 Ladder) для решения конкретных производственных задач. Это навык автономного решения проблем "от и до".
                     </p>
                 </div>
                 <ul class="mt-6 list-disc list-inside space-y-2 text-green-700">
-                    <li><span class="font-semibold text-green-800">Повышение уровня гигиены:</span> Гарантированный цикл дезинфекции рук для всего персонала, входящего в "чистую зону".</li>
-                    <li><span class="font-semibold text-green-800">Автоматизация процесса:</span> Исключен человеческий фактор и ручное управление, ускорен проход персонала.</li>
-                    <li><span class="font-semibold text-green-800">Расширение компетенций:</span> Получен успешный опыт программирования ПЛК UNITRONICS, что доказывает способность работать с контроллерами различных производителей.</li>
+                    <li><span class="font-semibold text-green-800">Стабильная работа:</span> Обеспечена бесперебойная и корректная работа санпропускника.</li>
+                    <li><span class="font-semibold text-green-800">Соблюдение норм:</span> Гарантировано точное время выполнения санитарных процедур.</li>
+                    <li><span class="font-semibold text-green-800">Гибкость:</span> Новая программа позволила легко изменять параметры (например, время дезинфекции) без привлечения сторонних специалистов.</li>
                 </ul>
             </section>
 
@@ -163,3 +152,4 @@
 
 </body>
 </html>
+
