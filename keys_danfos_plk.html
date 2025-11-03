@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейс: Настройка ПЛК и приводов Danfoss</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* bg-gray-50 */
+            color: #1f2937; /* text-gray-900 */
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-gray-900 border-b-4 border-blue-100 pb-2 mb-8;
+        }
+        .tag {
+            @apply px-3 py-1 text-xs font-semibold rounded-full;
+        }
+        .code-block {
+            @apply bg-gray-800 text-green-300 p-4 rounded-lg text-sm overflow-x:auto;
+        }
+        .screenshot-card {
+            @apply bg-white p-4 rounded-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигационная панель (простая) -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <a href="#" onclick="window.close()" class="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">← Назад к резюме</a>
+        </div>
+    </nav>
+
+    <!-- Основной контент кейса -->
+    <main class="container mx-auto px-4 py-12 md:py-16">
+        <div class="max-w-6xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100">
+
+            <header class="mb-12 text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-blue-500 mb-2">Кейс-стади</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Настройка ПЛК и Частотных Приводов</h1>
+                <p class="mt-4 text-lg text-gray-600">Интеграция Danfoss FC51 и ПЛК MCX06D для прецизионного управления микроклиматом.</p>
+                <div class="mt-6 flex justify-center space-x-3">
+                    <span class="tag bg-blue-100 text-blue-800">Danfoss FC51</span>
+                    <span class="tag bg-blue-100 text-blue-800">Danfoss MCX06D</span>
+                    <span class="tag bg-blue-100 text-blue-800">ПИД-регулирование</span>
+                    <span class="tag bg-blue-100 text-blue-800">Modbus RTU</span>
+                </div>
+            </header>
+
+            <!-- 1. Обзор проекта -->
+            <section class="mb-12">
+                <h2 class="section-title">Обзор проекта</h2>
+                <p class="text-lg text-gray-700">
+                    Для достижения точного и энергоэффективного микроклимата в птичниках недостаточно простого включения/выключения вентиляции. Требуется плавное (аналоговое) управление скоростью вращения вентиляторов. Данный проект был сфокусирован на настройке и связке двух ключевых компонентов Danfoss: частотного преобразователя (ЧП) FC51 и программируемого контроллера (ПЛК) MCX06D.
+                </p>
+            </section>
+
+            <!-- 2. Компоненты и Задачи -->
+            <section class="mb-12">
+                <h2 class="section-title">Компоненты и Задачи</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Работа была разделена на настройку исполнительного устройства (ЧП) и программирование управляющего устройства (ПЛК).
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Danfoss FC51 (Частотный привод)</h4>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <span class="font-semibold block text-gray-700">Задача:</span>
+                            Настроить параметры привода для приема команд по Modbus.
+                            <br><br>
+                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <ul class="list-disc list-inside ml-1">
+                                <li>Конфигурация Modbus RTU (адрес, скорость, четность).</li>
+                                <li>Настройка аналогового выхода (0-10В) как источника задания скорости.</li>
+                                <li>Установка пределов (min/max) скорости вращения.</li>
+                                <li>Настройка времени разгона/торможения для плавного пуска.</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Danfoss MCX06D (ПЛК)</h4>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <span class="font-semibold block text-gray-700">Задача:</span>
+                            Реализовать логику управления микроклиматом.
+                            <br><br>
+                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <ul class="list-disc list-inside ml-1">
+                                <li>Написание программы (ST/FBD) для обработки сигналов с датчиков.</li>
+                                <li>Реализация ПИД-регулятора для вычисления необходимой мощности вентиляции.</li>
+                                <li>Формирование управляющего сигнала (0-10В) для FC51.</li>
+                                <li>Настройка Modbus Master на контроллере.</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Интеграция и Связь</h4>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <span class="font-semibold block text-gray-700">Задача:</span>
+                            Обеспечить стабильную связь между ПЛК и ЧП.
+                            <br><br>
+                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <ul class="list-disc list-inside ml-1">
+                                <li>Физическое подключение устройств по шине RS-485.</li>
+                                <li>Отладка протокола Modbus, мониторинг пакетов данных.</li>
+                                <li>Проверка корректности записи в регистры FC51 и чтение статуса.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Техническая реализация -->
+            <section class="mb-12">
+                <h2 class="section-title">Техническая реализация</h2>
+                <div class="grid grid-cols-1">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-blue-600 mb-3">Логика ПИД-регулирования</h4>
+                        <p class="text-gray-700 mb-4">
+                            Ключевой элемент системы — ПИД-регулятор, реализованный в ПЛК MCX06D.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><b>Вход (PV):</b> Среднее значение с датчиков температуры в птичнике.</li>
+                            <li><b>Задание (SP):</b> Температурная уставка, соответствующая дню откорма.</li>
+                            <li><b>Выход (MV):</b> Управляющий сигнал (0-10В), который ПЛК подает на аналоговый вход Danfoss FC51.</li>
+                            <li><b>Логика:</b> Если фактическая температура (PV) превышает уставку (SP), ПИД-регулятор плавно увеличивает выход (MV), что заставляет FC51 наращивать обороты вентиляторов. При достижении уставки обороты стабилизируются, экономя энергию.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Ключевые результаты и выводы -->
+            <section>
+                <h2 class="section-title">Результаты и выводы</h2>
+                <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-400">
+                    <h4 class="text-xl font-semibold text-blue-800 mb-3">Ключевой вклад:</h4>
+                    <p class="text-blue-700">
+                        Успешная настройка и интеграция связки "ПЛК + Частотный привод" (на примере Danfoss) для задач прецизионного аналогового управления. Этот навык позволяет реализовывать энергоэффективные и стабильные системы микроклимата, вместо дискретных (вкл/выкл) систем.
+                    </p>
+                </div>
+                <ul class="mt-6 list-disc list-inside space-y-2 text-green-700">
+                    <li><span class="font-semibold text-green-800">Достигнуто плавное регулирование:</span> Вентиляторы работают не на 100% мощности, а ровно настолько, насколько это необходимо.</li>
+                    <li><span class="font-semibold text-green-800">Снижен износ оборудования:</span> Плавный пуск и остановка двигателей через ЧП значительно продлевают срок их службы.</li>
+                    <li><span class="font-semibold text-green-800">Подтверждена экспертиза:</span> Продемонстрировано умение работать с оборудованием и ПО Danfoss, одним из лидеров в области приводной техники и промышленной автоматизации.</li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="border-t border-gray-200 bg-white mt-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500">
+            Этот проект является частью портфолио Людвига К.А.
+        </div>
+    </footer>
+
+</body>
+</html>
