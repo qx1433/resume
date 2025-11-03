@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейс: Восстановление бадьямойки Nieros</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* bg-gray-50 */
+            color: #1f2937; /* text-gray-900 */
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-gray-900 border-b-4 border-blue-100 pb-2 mb-8;
+        }
+        .tag {
+            @apply px-3 py-1 text-xs font-semibold rounded-full;
+        }
+        .code-block {
+            @apply bg-gray-800 text-green-300 p-4 rounded-lg text-sm overflow-x:auto;
+        }
+        .screenshot-card {
+            @apply bg-white p-4 rounded-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигационная панель (простая) -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <a href="#" onclick="window.close()" class="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">← Назад к резюме</a>
+        </div>
+    </nav>
+
+    <!-- Основной контент кейса -->
+    <main class="container mx-auto px-4 py-12 md:py-16">
+        <div class="max-w-6xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100">
+
+            <header class="mb-12 text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-blue-500 mb-2">Кейс-стади</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Восстановление и автоматизация бадьямойки Nieros</h1>
+                <p class="mt-4 text-lg text-gray-600">Замена вышедшего из строя контроллера на ПЛК ОВЕН ПЛК110-60 с полной разработкой новой логики управления.</p>
+                <div class="mt-6 flex justify-center space-x-3">
+                    <span class="tag bg-blue-100 text-blue-800">ОВЕН ПЛК110-60</span>
+                    <span class="tag bg-blue-100 text-blue-800">CodeSys (ST/LD)</span>
+                    <span class="tag bg-blue-100 text-blue-800">Реверс-инжиниринг</span>
+                    <span class="tag bg-blue-100 text-blue-800">КИПиА</span>
+                    <span class="tag bg-blue-100 text-blue-800">Nieros CL-K 2x200D</span>
+                </div>
+            </header>
+
+            <!-- 1. Обзор проекта -->
+            <section class="mb-12">
+                <h2 class="section-title">Обзор проекта</h2>
+                <p class="text-lg text-gray-700">
+                    Промышленная моечная машина Nieros CL-K 2x200D, критически важная для санитарной обработки, вышла из строя из-за отказа "родного" контроллера. Документация на логику управления отсутствовала. Было принято решение не ремонтировать устаревший блок, а провести полную модернизацию системы управления, заменив его на доступный и гибкий ПЛК ОВЕН ПЛК110-60.
+                </p>
+            </section>
+
+            <!-- 2. Компоненты и Задачи -->
+            <section class="mb-12">
+                <h2 class="section-title">Компоненты и Задачи</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Проект требовал комплексного подхода: от "прозвонки" проводов до написания пользовательской документации.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Реверс-инжиниринг и маппинг I/O</h4>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <span class="font-semibold block text-gray-700">Задача:</span>
+                            Определить назначение каждого датчика и исполнительного механизма машины, не имея схемы логики.
+                            <br><br>
+                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <ul class="list-disc list-inside ml-1">
+                                <li>Анализ электрических схем (из PDF) и физическая "прозвонка" цепей.</li>
+                                <li>Идентификация всех дискретных входов (DI): датчики уровня, сенсоры дверей, кнопки.</li>
+                                <li>Идентификация всех дискретных выходов (DO): клапаны подачи воды/пара, насосы, гидравлика дверей, вентилятор.</li>
+                                <li>Составление полной карты назначения (маппинга) входов/выходов.</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Программирование ПЛК (CodeSys)</h4>
+                        <p class="text-sm text-gray-600 mt-2">
+                            <span class="font-semibold block text-gray-700">Задача:</span>
+                            Написать с нуля всю логику работы машины на ПЛК110-60.
+                            <br><br>
+                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <ul class="list-disc list-inside ml-1">
+                                <li>Разработка программы на ST и LD в среде CodeSys.</li>
+                                <li>Реализация циклов мойки: "Грязный" (20 сек) и "Чистый" (10 сек).</li>
+                                <li>Программирование цикла полоскания (8 сек).</li>
+                                <li>Логика управления нагревом (ТЭНы/пар) и поддержания уровня воды в баках.</li>
+                                <li>Реализация блокировок (невозможность запуска при открытых дверях, низком уровне воды).</li>
+                                <li>Создание "Листа возможных ошибок" для операторов.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Техническая реализация -->
+            <section class="mb-12">
+                <h2 class="section-title">Техническая реализация</h2>
+                <div class="grid grid-cols-1">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-blue-600 mb-3">Пример маппинга I/O (из .txt файла)</h4>
+                        <p class="text-gray-700 mb-4">
+                            Ключевым этапом был реверс-инжиниринг и назначение переменных CodeSys физическим входам/выходам контроллера.
+                        </p>
+                        <pre class="code-block">
+(* DI - Дискретные входы *)
+i1_wash_low := i1;       (* DI 1 – низкий уровень в мойке *)
+i2_wash_hight := i2;     (* DI 2 – высокий уровень в мойке *)
+i3_rinse_low := i3;      (* DI 3 – низкий уровень в ополаскивании *)
+i4_rinse_hight := i4;    (* DI 4 – высокий уровень в ополаскивании *)
+
+i7_sensor_door_open := i5;  (* DI 5 – сенсор открытия двери *)
+i8_sensor_door_close := i6; (* DI 6 – сенсор закрытия двери *)
+
+R7_rinse_temp_OK := i8;  (* DI 8 – температура в ополаскивании ОК *)
+R6_wash_temp_OK := i9;   (* DI 9 - температура в мойке ОК *)
+
+r1_start_wash := i11;    (* DI 11 – старт машины *)
+r2_stop_wash := i12;     (* DI 12 – стоп машины *)
+r3_door_auto := i13;     (* DI 13 – дверь в автоматическом режиме *)
+
+(* ... и так далее ... *)
+
+(* DO - Дискретные выходы *)
+do1:=q1_fiil_wash;      (* DO 1 – клапан воды мойка *)
+do2:=q2_fill_rinse;     (* DO 2 – клапан воды ополаскивания *)
+do3:=q3_heat_wash;      (* DO 3 – клапан пара в мойку *)
+do4:=q4_heat_rinse;     (* DO 4 - клапан пара в ополаскивание *)
+do5:=q5_pump_wash;      (* DO 5 - двигатель подачи воды при стирке *)
+do6:=q6_pump_rinse;     (* DO 6 – двигатель подачи воды при ополаскивании *)
+do7:=q22_ventilator;    (* DO 7 – вентилятор *)
+do8:=q32_door_close;    (* DO 8 – сигнал закрытия двери *)
+do9:=q42_door_open;     (* DO 9 – сигнал открытия двери *)
+do10:=q52_pump_hydraulic;(* DO 10 –сигнал гидравлики дверей *)
+                        </pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Ключевые результаты и выводы -->
+            <section>
+                <h2 class="section-title">Результаты и выводы</h2>
+                <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-400">
+                    <h4 class="text-xl font-semibold text-blue-800 mb-3">Ключевой вклад:</h4>
+                    <p class="text-blue-700">
+                        Проект демонстрирует способность провести полный цикл реверс-инжиниринга и модернизации сложного промышленного оборудования. Умение разобраться в чужой (и отсутствующей) документации, подобрать аналог контроллера и написать с нуля стабильную управляющую программу.
+                    </p>
+                </div>
+                <ul class="mt-6 list-disc list-inside space-y-2 text-green-700">
+                    <li><span class="font-semibold text-green-800">Оборудование введено в строй:</span> Машина была успешно запущена и возвращена в производственный цикл, что исключило простои.</li>
+                    <li><span class="font-semibold text-green-800">Создана документация:</span> Написаны "Краткая инструкция" и "Лист возможных ошибок", что позволило операторам и службе эксплуатации корректно работать с новой системой.</li>
+                    <li><span class="font-semibold text-green-800">Снижение зависимости:</span> Предприятие больше не зависит от устаревшего и редкого оригинального контроллера Nieros.</li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="border-t border-gray-200 bg-white mt-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500">
+            Этот проект является частью портфолио Людвига К.А.
+        </div>
+    </footer>
+
+</body>
+</html>
+
