@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейс: Прототип Telegram-бота для Excel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* bg-gray-50 */
+            color: #1f2937; /* text-gray-900 */
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-gray-900 border-b-4 border-blue-100 pb-2 mb-8;
+        }
+        .tag {
+            @apply px-3 py-1 text-xs font-semibold rounded-full;
+        }
+        .code-block {
+            @apply bg-gray-800 text-green-300 p-4 rounded-lg text-sm overflow-x-auto;
+        }
+        .screenshot-card {
+            @apply bg-white p-4 rounded-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигационная панель (простая) -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <a href="interactive_resume_ludwig_ka.html" class="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">← Назад к резюме</a>
+        </div>
+    </nav>
+
+    <!-- Основной контент кейса -->
+    <main class="container mx-auto px-4 py-12 md:py-16">
+        <div class="max-w-6xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100">
+
+            <header class="mb-12 text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-blue-500 mb-2">Кейс-стади / Пилотный проект</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Прототип Telegram-бота для управления задачами в Excel</h1>
+                <p class="mt-4 text-lg text-gray-600">Разработка и демонстрация (Proof-of-Concept) системы для двусторонней связи между Telegram и локальным Excel-файлом.</p>
+                <div class="mt-6 flex justify-center space-x-3">
+                    <span class="tag bg-blue-100 text-blue-800">Telegram Bot API</span>
+                    <span class="tag bg-blue-100 text-blue-800">Python</span>
+                    <span class="tag bg-blue-100 text-blue-800">Excel (Локально)</span>
+                    <span class="tag bg-blue-100 text-blue-800">Автоматизация</span>
+                </div>
+            </header>
+
+            <!-- 1. Обзор проекта -->
+            <section class="mb-12">
+                <h2 class="section-title">Задача и Концепция</h2>
+                <p class="text-lg text-gray-700">
+                    На производстве часто возникает потребность в быстрой постановке и отслеживании задач "в полях", без доступа к стационарному ПК. 
+                    Этот проект был разработан как пилотный (Proof-of-Concept) для демонстрации возможности создания простой и эффективной системы таск-менеджмента.
+                </p>
+                <p class="text-lg text-gray-700 mt-4">
+                    <strong>Цель:</strong> Создать Telegram-бота, который может удаленно читать и изменять данные в локальном Excel-файле на компьютере, позволяя пользователям через телефон назначать задачи, менять их статусы и указывать ответственных.
+                </p>
+            </section>
+
+            <!-- 2. Скриншоты и Визуализация -->
+            <section class="mb-12">
+                <h2 class="section-title">Демонстрация работы</h2>
+                
+                <!-- Встроенное видео -->
+                <div class="relative w-full overflow-hidden rounded-xl shadow-xl mb-8" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/jo4Vk4FjMhc?si=Jxal4FDvsNzGwKgq" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <p class="text-lg text-gray-700 mb-6">
+                    Прототип был успешно реализован и протестирован локально. Видео выше демонстрирует основной функционал:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Интерфейс Telegram-бота</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2 mt-2">
+                            <li>Выбор специалиста (папки) из списка.</li>
+                            <li>Просмотр существующих задач (протоколов).</li>
+                            <li>Создание новой задачи по шаблону.</li>
+                            <li>Редактирование задачи: изменение статуса ("В процессе", "Выполнено").</li>
+                            <li>Редактирование задачи: назначение/смена ответственного.</li>
+                        </ul>
+                    </div>
+                    <div class="screenshot-card">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Синхронизация с Excel</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2 mt-2">
+                            <li>Локальный Excel-файл ("Автоматизация учета") выступает в роли базы данных.</li>
+                            <li>Изменения, внесенные через бота (например, смена статуса на "Выполнено"), мгновенно отображаются в Excel-файле.</li>
+                            <li>Изменения, внесенные вручную в Excel, также считываются ботом при следующем запросе.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Техническая реализация -->
+            <section class="mb-12">
+                <h2 class="section-title">Техническая реализация</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-blue-600 mb-3">Стек технологий</h4>
+                        <p class="text-gray-700 mb-4">
+                            Для реализации прототипа использовались Python-скрипты, которые выполняли роль связующего звена (middleware) между облачным API Telegram и локальным файлом.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Telegram Bot API:</strong> Для приема команд от пользователя (кнопки, текст).</li>
+                            <li><strong>Python (aiogram/telebot):</strong> Библиотека для обработки логики бота.</li>
+                            <li><strong>Pandas/OpenPyXL:</strong> Библиотеки для чтения и записи данных в `.xlsx` файл.</li>
+                            <li><strong>Локальный сервер:</strong> Скрипт, запущенный на ПК, который "слушает" бота и имеет доступ к файловой системе.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-semibold text-blue-600 mb-3">Пример псевдокода (Логика)</h4>
+                        <p class="text-gray-700 mb-4">
+                            Упрощенная логика обработчика изменения статуса задачи:
+                        </p>
+                        <pre class="code-block">
+# Псевдокод Python
+@bot.callback_handler(func=lambda call: call.data.startswith('status_'))
+def change_status(call):
+    task_id = call.data.split('_')[1]
+    new_status = call.data.split('_')[2]
+
+    # 1. Найти Excel файл
+    workbook = load_workbook('tasks.xlsx')
+    sheet = workbook.active
+
+    # 2. Найти нужную строку (задачу)
+    row = find_task_by_id(sheet, task_id)
+
+    # 3. Изменить статус в ячейке
+    sheet[f'C{row}'] = new_status
+    workbook.save('tasks.xlsx')
+
+    # 4. Ответить пользователю
+    bot.answer_callback_query(call.id, "Статус изменен!")
+                        </pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Ключевые результаты и выводы -->
+            <section>
+                <h2 class="section-title">Результаты и выводы</h2>
+                <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-400">
+                    <h4 class="text-xl font-semibold text-blue-800 mb-3">Ключевой вклад:</h4>
+                    <p class="text-blue-700">
+                        Проект успешно доказал, что интеграция между облачными сервисами (Telegram) и локальными системами (Excel) возможна и эффективна. Это демонстрирует способность быстро создавать прототипы (R&D) и находить нестандартные решения для автоматизации рабочих процессов, используя современные инструменты (ИИ-ассистенты, API).
+                    </p>
+                </div>
+                <p class="mt-6 text-gray-700">
+                    Этот прототип легко масштабируется путем замены локального Excel на облачные Google Таблицы (Google Sheets API), что позволило бы создать полноценную многопользовательскую систему таск-менеджмента без необходимости в локальном сервере.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>
+
