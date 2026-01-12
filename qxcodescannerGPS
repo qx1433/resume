@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>QR Логгер (GPS Control)</title>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5; margin: 0; padding: 0; color: #333;
+            -webkit-tap-highlight-color: transparent;
+        }
+        header {
+            background-color: #2b6cb0; color: white; padding: 15px; text-align: center;
+            font-weight: 700; font-size: 18px; position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;
+        }
+        .status-indicator { font-size: 11px; background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 10px; }
+        .container { padding: 15px; max-width: 600px; margin: 0 auto; padding-bottom: 80px; }
+
+        /* Кнопка сканирования */
+        .scan-area {
+            background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center;
+        }
+        .btn-scan {
+            width: 100%; padding: 20px; background: #2b6cb0; color: white;
+            border: none; border-radius: 12px; font-size: 18px; font-weight: bold;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .btn-scan:active { background: #2c5282; transform: scale(0.98); }
+        
+        /* Список логов */
+        .log-card {
+            background: white; border-radius: 8px; padding: 15px; margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center;
+            border-left: 4px solid #cbd5e0;
+        }
+        .log-card.synced { border-left-color: #48bb78; }
+        .log-card.unsynced { border-left-color: #ed8936; }
+
+        .log-content { flex: 1; }
+        .log-code { font-weight: bold; font-size: 16px; color: #2d3748; }
+        .log-meta { font-size: 12px; color: #718096; margin-top: 4px; display: flex; flex-direction: column; gap: 2px; }
+        .gps-tag { color: #dd6b20; font-weight: bold; }
+        .gps-ok { color: #38a169; }
+
+        .log-status { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 10px; }
+        .status-ok { background: #f0fff4; color: #2f855a; }
+        .status-wait { background: #fffaf0; color: #dd6b20; }
+
+        /* Настройки */
+        .settings-box { background: white; padding: 15px; border-radius: 12px; margin-bottom: 15px; }
+        .input-text { width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 10px; box-sizing: border-box; }
+        .btn-action { width: 100%; padding: 12px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; margin-bottom: 5px; }
+        .btn-sync { background: #48bb78; color: white; }
+        .btn-clear { background: #fed7d7; color: #c53030; margin-top: 10px; }
+
+        /* Камера */
+        .camera-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: black; z-index: 500; display: none;
+            flex-direction: column; justify-content: center;
+        }
+        .camera-overlay.active { display: flex; }
+        #reader { width: 100%; }
+        .close-cam {
+            position: absolute; top: 20px; right: 20px;
+            background: rgba(255,255,255,0.3); color: white;
+            border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; z-index: 501;
+        }
+
+        .toast {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: #2d3748; color: white; padding: 10px 20px; border-radius: 20px;
+            opacity: 0; transition: opacity 0.3s; z-index: 600; font-size: 14px; text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>QR Логгер <span style="font-size:12px; opacity:0.8">GPS</span></div>
+        <div class="status-indicator" id="dbStatus">Очередь: 0</div>
+    </header>
+
+    <div class="container">
+        
+        <div class="scan-area">
+            <button class="btn-scan" onclick="startScanner()">📸 Сканировать QR</button>
+            <p style="font-size: 12px; color: #718096; margin-top: 10px;">
+                Включите GPS на телефоне для подтверждения места.
+            </p>
+        </div>
+
+        <div class="settings-box">
+            <h3 style="margin-top:0; font-size:16px;">Настройки</h3>
+            <input type="text" id="googleAppUrl" class="input-text" placeholder="Ссылка на Google Script">
+            <input type="text" id="deviceName" class="input-text" placeholder="Имя сотрудника / Объект">
+            
+            <button class="btn-action btn-sync" onclick="syncData()">📤 Отправить в Google</button>
+            <button class="btn-action btn-clear" onclick="clearLogs()">🗑 Очистить</button>
+        </div>
+
+        <h3 style="margin-left: 5px; font-size: 16px;">История</h3>
+        <div id="logsList"></div>
+    </div>
+
+    <div class="camera-overlay" id="cameraModal">
+        <button class="close-cam" onclick="stopScanner()">Закрыть</button>
+        <div id="reader"></div>
+        <div style="color:white; text-align:center; margin-top:20px;">Наведите на QR код</div>
+    </div>
+
+    <div id="toast" class="toast">Сообщение</div>
+
+    <script>
+        let logs = [];
+        let html5QrCode;
+        let isScanning = false;
+
+        window.onload = function() {
+            loadFromStorage();
+            renderLogs();
+        };
+
+        function loadFromStorage() {
+            const savedLogs = localStorage.getItem('qr_logs_gps');
+            const savedUrl = localStorage.getItem('qr_google_url');
+            const savedName = localStorage.getItem('qr_device_name');
+            
+            if (savedLogs) logs = JSON.parse(savedLogs);
+            if (savedUrl) document.getElementById('googleAppUrl').value = savedUrl;
+            if (savedName) document.getElementById('deviceName').value = savedName;
+            updateStatus();
+        }
+
+        function saveToStorage() {
+            localStorage.setItem('qr_logs_gps', JSON.stringify(logs));
+            localStorage.setItem('qr_google_url', document.getElementById('googleAppUrl').value);
+            localStorage.setItem('qr_device_name', document.getElementById('deviceName').value);
+            updateStatus();
+        }
+
+        function updateStatus() {
+            const unsynced = logs.filter(l => !l.synced).length;
+            document.getElementById('dbStatus').innerText = `Очередь: ${unsynced}`;
+        }
+
+        // --- СКАНЕР + GPS ---
+        function startScanner() {
+            if (typeof Html5Qrcode === "undefined") {
+                alert("Ошибка: Библиотека сканера не загружена. Проверьте интернет.");
+                return;
+            }
+            document.getElementById('cameraModal').classList.add('active');
+            html5QrCode = new Html5Qrcode("reader");
+            const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+            
+            html5QrCode.start({ facingMode: "environment" }, config, onScanSuccess, (err) => {})
+            .catch(err => { alert("Ошибка камеры: " + err); stopScanner(); });
+            isScanning = true;
+        }
+
+        function stopScanner() {
+            if (isScanning && html5QrCode) {
+                html5QrCode.stop().then(() => {
+                    html5QrCode.clear();
+                    document.getElementById('cameraModal').classList.remove('active');
+                });
+                isScanning = false;
+            } else {
+                document.getElementById('cameraModal').classList.remove('active');
+            }
+        }
+
+        function onScanSuccess(decodedText, decodedResult) {
+            stopScanner();
+            showToast("Код принят! Определяем координаты...");
+            
+            // Запрашиваем GPS
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        addLog(decodedText, position.coords.latitude, position.coords.longitude);
+                        showToast("✅ Сохранено с GPS!");
+                    },
+                    function(error) {
+                        // Если GPS выключен или запрещен
+                        addLog(decodedText, "Нет доступа", "Нет доступа");
+                        alert("⚠️ Внимание! GPS не определен. Включите геолокацию для подтверждения.");
+                    },
+                    { enableHighAccuracy: true, timeout: 10000 }
+                );
+            } else {
+                addLog(decodedText, "Не поддерживается", "Не поддерживается");
+            }
+        }
+
+        // --- ЛОГИКА ДАННЫХ ---
+        function addLog(text, lat, lon) {
+            const newLog = {
+                id: Date.now(),
+                code: text,
+                ts: new Date().toISOString(),
+                gps: { lat: lat, lon: lon },
+                synced: false
+            };
+            logs.unshift(newLog);
+            saveToStorage();
+            renderLogs();
+        }
+
+        function renderLogs() {
+            const container = document.getElementById('logsList');
+            container.innerHTML = '';
+            if (logs.length === 0) {
+                container.innerHTML = '<div style="text-align:center; color:#a0aec0; padding:20px;">Нет записей</div>';
+                return;
+            }
+            logs.forEach(log => {
+                const date = new Date(log.ts);
+                const timeStr = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+                // Проверка на корректность координат для отображения
+                const hasGps = (log.gps && log.gps.lat !== "Нет доступа" && log.gps.lat !== "Не поддерживается");
+                
+                const el = document.createElement('div');
+                el.className = `log-card ${log.synced ? 'synced' : 'unsynced'}`;
+                el.innerHTML = `
+                    <div class="log-content">
+                        <div class="log-code">${log.code}</div>
+                        <div class="log-meta">
+                            <span>🕒 ${timeStr}</span>
+                            <span class="${hasGps ? 'gps-ok' : 'gps-tag'}">
+                                📍 ${hasGps ? 'Координаты OK' : 'GPS не найден'}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="log-status ${log.synced ? 'status-ok' : 'status-wait'}">
+                        ${log.synced ? 'OK' : 'WAIT'}
+                    </div>`;
+                container.appendChild(el);
+            });
+        }
+
+        function clearLogs() {
+            if(confirm("Удалить отправленные записи?")) {
+                logs = logs.filter(l => !l.synced);
+                saveToStorage(); renderLogs();
+            }
+        }
+
+        // --- СИНХРОНИЗАЦИЯ ---
+        async function syncData() {
+            const url = document.getElementById('googleAppUrl').value;
+            const deviceName = document.getElementById('deviceName').value || "Неизвестный";
+            if (!url) return alert("❌ Введите URL скрипта!");
+            
+            const toSync = logs.filter(l => !l.synced);
+            if (toSync.length === 0) return alert("Нет новых данных.");
+
+            saveToStorage();
+            const btn = document.querySelector('.btn-sync');
+            const oldText = btn.innerText;
+            btn.innerText = "⏳ Отправка...";
+            btn.style.opacity = "0.7";
+
+            try {
+                await fetch(url, {
+                    method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ deviceName, data: toSync })
+                });
+                logs.forEach(l => { if (!l.synced) l.synced = true; });
+                saveToStorage(); renderLogs();
+                alert(`✅ Успешно отправлено: ${toSync.length}`);
+            } catch (e) {
+                alert("❌ Ошибка: " + e.message);
+            } finally {
+                btn.innerText = oldText; btn.style.opacity = "1";
+            }
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg; t.style.opacity = 1;
+            setTimeout(() => t.style.opacity = 0, 3000);
+        }
+    </script>
+</body>
+</html>
