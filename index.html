@@ -18,15 +18,15 @@
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
             margin-left: auto;
             margin-right: auto;
-            height: 400px;
-            max-height: 500px;
+            height: 450px;
+            max-height: 550px;
         }
         @media (min-width: 768px) {
             .chart-container {
-                height: 500px;
+                height: 550px;
             }
         }
         .timeline-item-dot {
@@ -448,13 +448,13 @@
             // --- Радарная диаграмма навыков ---
             const skillsData = {
                 labels: [
-                    'АСУ Микроклимата (BigDutchman, Fancom, SKOV)',
-                    'Программирование ПЛК (ST, Owen, Siemens)',
-                    'Отраслевая экспертиза (Птицеводство)',
-                    'Диагностика и расследование неисправностей',
-                    'Веб-разработка / PWA (Firebase, IndexedDB)',
-                    'Интеграция API и ИИ-ассистенты',
-                    'Наставничество и обучение'
+                    ['АСУ Микроклимата', '(BigDutchman, Fancom, SKOV)'],
+                    ['Программирование ПЛК', '(ST, Owen, Siemens)'],
+                    ['Отраслевая экспертиза', '(Птицеводство)'],
+                    ['Диагностика и', 'расследование неисправностей'],
+                    ['Веб-разработка / PWA', '(Firebase, IndexedDB)'],
+                    ['Интеграция API', 'и ИИ-ассистенты'],
+                    ['Наставничество', 'и обучение']
                 ],
                 datasets: [{
                     label: 'Уровень компетенций',
@@ -487,9 +487,10 @@
                             },
                             pointLabels: {
                                 font: {
-                                    size: 11
+                                    size: 10
                                 },
-                                color: '#1f2937'
+                                color: '#1f2937',
+                                padding: 15
                             },
                             ticks: {
                                 display: false,
