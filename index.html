@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Интерактивное резюме | Людвиг Константин Анатольевич</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -167,7 +167,7 @@
 
                 <div class="mt-12 md:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div class="chart-container">
-                        <canvas id="skillsChart"></canvas>
+                        <div id="skillsChart"></div>
                     </div>
                     <div class="space-y-8">
                         <div>
@@ -445,76 +445,84 @@
                 });
             });
 
-            // --- Радарная диаграмма навыков ---
-            const skillsData = {
-                labels: [
-                    ['АСУ Микроклимата', '(BigDutchman, Fancom, SKOV)'],
-                    ['Программирование ПЛК', '(ST, Owen, Siemens)'],
-                    ['Отраслевая экспертиза', '(Птицеводство)'],
-                    ['Диагностика и', 'расследование неисправностей'],
-                    ['Веб-разработка / PWA', '(Firebase, IndexedDB)'],
-                    ['Интеграция API', 'и ИИ-ассистенты'],
-                    ['Наставничество', 'и обучение']
-                ],
-                datasets: [{
-                    label: 'Уровень компетенций',
-                    data: [5, 5, 5, 5, 4, 4, 4],
-                    fill: true,
-                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                    borderColor: 'rgb(59, 130, 246)',
-                    pointBackgroundColor: 'rgb(59, 130, 246)',
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2,
-                    pointRadius: 5,
-                    pointHoverRadius: 7,
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgb(59, 130, 246)',
-                    borderWidth: 2
-                }]
-            };
-
-            const skillsChartCtx = document.getElementById('skillsChart').getContext('2d');
-            new Chart(skillsChartCtx, {
-                type: 'radar',
-                data: skillsData,
-                options: {
-                    maintainAspectRatio: false,
-                    responsive: true,
-                    scales: {
-                        r: {
-                            angleLines: {
-                                color: 'rgba(0, 0, 0, 0.08)'
-                            },
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.08)',
-                                lineWidth: 1
-                            },
-                            pointLabels: {
-                                font: {
-                                    size: 11,
-                                    weight: '500'
-                                },
-                                color: '#374151',
-                                padding: 20
-                            },
-                            ticks: {
-                                display: true,
-                                backdropColor: 'transparent',
-                                color: '#9ca3af',
-                                font: { size: 9 },
-                                min: 0,
-                                max: 5,
-                                stepSize: 1
-                            }
+            // --- Радарная диаграмма навыков (ApexCharts) ---
+            var skillsOptions = {
+                series: [{
+                    name: 'Уровень',
+                    data: [5, 5, 5, 5, 4, 4, 4]
+                }],
+                chart: {
+                    height: 480,
+                    type: 'radar',
+                    toolbar: { show: false },
+                    parentHeightOffset: 0
+                },
+                colors: ['#3b82f6'],
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shade: 'light',
+                        type: 'vertical',
+                        shadeIntensity: 0.2,
+                        opacityFrom: 0.4,
+                        opacityTo: 0.1
+                    }
+                },
+                stroke: {
+                    width: 2,
+                    colors: ['#3b82f6']
+                },
+                markers: {
+                    size: 5,
+                    colors: ['#3b82f6'],
+                    strokeColors: '#fff',
+                    strokeWidth: 2,
+                    hover: {
+                        size: 7
+                    }
+                },
+                xaxis: {
+                    categories: [
+                        'АСУ Микроклимата\n(BigDutchman, Fancom, SKOV)',
+                        'Программирование ПЛК\n(ST, Owen, Siemens)',
+                        'Отраслевая экспертиза\n(Птицеводство)',
+                        'Диагностика и\nрасследование неисправностей',
+                        'Веб-разработка / PWA\n(Firebase, IndexedDB)',
+                        'Интеграция API\nи ИИ-ассистенты',
+                        'Наставничество\nи обучение'
+                    ],
+                    labels: {
+                        style: {
+                            colors: ['#374151'],
+                            fontSize: '11px',
+                            fontWeight: 500
                         }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
+                    }
+                },
+                yaxis: {
+                    min: 0,
+                    max: 5,
+                    tickAmount: 5,
+                    labels: {
+                        show: true,
+                        style: {
+                            colors: ['#9ca3af'],
+                            fontSize: '9px'
+                        }
+                    }
+                },
+                plotOptions: {
+                    radar: {
+                        polygons: {
+                            strokeColors: 'rgba(0, 0, 0, 0.08)',
+                            connectorColors: 'rgba(0, 0, 0, 0.08)'
                         }
                     }
                 }
-            });
+            };
+
+            var skillsChart = new ApexCharts(document.querySelector("#skillsChart"), skillsOptions);
+            skillsChart.render();
 
             // --- Данные для проектов ---
             const projects = [
