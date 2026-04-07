@@ -21,8 +21,13 @@
             max-width: 650px;
             margin-left: auto;
             margin-right: auto;
-            height: 450px;
+            height: 420px;
             max-height: 600px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 520px;
+            }
         }
         @media (min-width: 768px) {
             .chart-container {
@@ -452,7 +457,7 @@
                     data: [5, 5, 5, 5, 4, 4, 4]
                 }],
                 chart: {
-                    height: 480,
+                    height: 500,
                     type: 'radar',
                     toolbar: { show: false },
                     parentHeightOffset: 0
@@ -518,7 +523,44 @@
                             connectorColors: 'rgba(0, 0, 0, 0.08)'
                         }
                     }
-                }
+                },
+                responsive: [{
+                    breakpoint: 768,
+                    options: {
+                        chart: {
+                            height: 420
+                        },
+                        xaxis: {
+                            categories: [
+                                'Микроклимат',
+                                'ПЛК',
+                                'Птицеводство',
+                                'Диагностика',
+                                'PWA / Firebase',
+                                'API / ИИ',
+                                'Обучение'
+                            ],
+                            labels: {
+                                style: {
+                                    colors: ['#374151'],
+                                    fontSize: '10px',
+                                    fontWeight: 400
+                                }
+                            }
+                        },
+                        yaxis: {
+                            labels: {
+                                style: {
+                                    fontSize: '8px'
+                                }
+                            }
+                        },
+                        markers: {
+                            size: 4,
+                            strokeWidth: 1
+                        }
+                    }
+                }]
             };
 
             var skillsChart = new ApexCharts(document.querySelector("#skillsChart"), skillsOptions);
