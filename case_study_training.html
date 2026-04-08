@@ -5,59 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кейс: Обучение персонала и Наставничество</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Geist', 'system-ui', 'sans-serif'],
+                        mono: ['Geist Mono', 'monospace'],
+                    },
+                },
+            },
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f9fafb; /* bg-gray-50 */
-            color: #1f2937; /* text-gray-900 */
+            font-family: 'Geist', system-ui, sans-serif;
+            background-color: #fafafa;
+            color: #18181b;
         }
         .section-title {
-            @apply text-3xl md:text-4xl font-bold text-gray-900 border-b-4 border-blue-100 pb-2 mb-8;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #18181b;
+            letter-spacing: -0.025em;
         }
         .tag {
-            @apply px-3 py-1 text-xs font-semibold rounded-full;
+            display: inline-block;
+            padding: 0.25rem 0.625rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background-color: #f0fdf4;
+            color: #166534;
+            border: 1px solid #dcfce7;
         }
         .code-block {
-            @apply bg-gray-800 text-green-300 p-4 rounded-lg text-sm overflow-x:auto;
+            background-color: #18181b;
+            color: #a1a1aa;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            font-size: 0.8125rem;
+            font-family: 'Geist Mono', monospace;
+            overflow-x: auto;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .card-surface {
+            background-color: #fff;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.04);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .screenshot-card {
-            @apply bg-white p-4 rounded-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5;
+            background-color: #fff;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            box-shadow: 0 4px 12px -4px rgba(0,0,0,0.03);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .screenshot-card:hover {
+            box-shadow: 0 8px 24px -8px rgba(0,0,0,0.06);
+            transform: translateY(-1px);
+        }
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-item.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
 
-    <!-- Навигационная панель (простая) -->
-    <nav class="bg-white shadow-md">
-        <div class="container mx-auto px-4 py-4">
-            <a href="#" onclick="window.close()" class="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">← Назад к резюме</a>
+    <div class="grain-overlay" aria-hidden="true" style="position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0.025;background-image:url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);background-repeat:repeat;background-size:200px;"></div>
+
+    <nav class="sticky top-0 bg-white/80 backdrop-blur-xl z-40 border-b border-zinc-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <a href="https://qx1433.github.io/resume/" class="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-emerald-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Назад к резюме
+            </a>
         </div>
     </nav>
 
-    <!-- Основной контент кейса -->
-    <main class="container mx-auto px-4 py-12 md:py-16">
-        <div class="max-w-6xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div class="card-surface p-8 md:p-12">
 
-            <header class="mb-12 text-center">
-                <p class="text-sm font-semibold uppercase tracking-wider text-blue-500 mb-2">Кейс-стади</p>
-                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Обучение персонала и Наставничество</h1>
-                <p class="mt-4 text-lg text-gray-600">Разработка инструкций и проведение тренингов для зоотехников и инженеров АСУ.</p>
-                <div class="mt-6 flex justify-center space-x-3">
-                    <span class="tag bg-blue-100 text-blue-800">Наставничество</span>
-                    <span class="tag bg-blue-100 text-blue-800">Разработка инструкций</span>
-                    <span class="tag bg-blue-100 text-blue-800">Soft Skills</span>
-                    <span class="tag bg-blue-100 text-blue-800">АСУ</span>
+            <header class="mb-12 text-left">
+                <p class="text-xs font-semibold tracking-widest uppercase text-emerald-600 mb-2">Кейс-стади</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-zinc-900 leading-tight">Обучение персонала и Наставничество</h1>
+                <p class="mt-4 text-lg text-zinc-500">Разработка инструкций и проведение тренингов для зоотехников и инженеров АСУ.</p>
+                <div class="mt-6 flex flex-wrap gap-2">
+                    <span class="tag">Наставничество</span>
+                    <span class="tag">Разработка инструкций</span>
+                    <span class="tag">Soft Skills</span>
+                    <span class="tag">АСУ</span>
                 </div>
             </header>
 
-            <!-- 1. Обзор проекта -->
-            <section class="mb-12">
+            <section class="mb-12 reveal-item">
                 <h2 class="section-title">Проблема</h2>
-                <p class="text-lg text-gray-700">
+                <p class="text-lg text-zinc-600">
                     Современные системы АСУ микроклиматом (BigDutchman, Fancom, DACS) являются сложным оборудованием. Было выявлено несколько проблем, связанных с человеческим фактором:
-                    <ul class="list-disc list-inside ml-4 mt-4 text-lg text-gray-700 space-y-2">
+                    <ul class="list-disc list-inside ml-4 mt-4 text-lg text-zinc-600 space-y-2">
                         <li><b>Ошибки операторов:</b> Зоотехники и мастера не всегда понимали логику работы контроллеров, что приводило к неверной установке параметров или игнорированию аварий.</li>
                         <li><b>"Текучка" кадров:</b> Новые инженеры АСУ тратили недели на то, чтобы "въехать" в специфику работы оборудования на объекте.</li>
                         <li><b>Отсутствие документации:</b> Существующие инструкции были либо "заводскими" (сложными и на английском), либо отсутствовали вовсе.</li>
@@ -67,20 +122,19 @@
                 </p>
             </section>
 
-            <!-- 2. Решение и Реализация -->
-            <section class="mb-12">
+            <section class="mb-12 reveal-item">
                 <h2 class="section-title">Решение и Реализация</h2>
-                <p class="text-lg text-gray-700 mb-6">
+                <p class="text-lg text-zinc-600 mb-6">
                     Был применен комплексный подход, сочетающий создание "бумажных" инструкций с "полевым" обучением.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="screenshot-card">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Разработка документации</h4>
-                        <p class="text-sm text-gray-600 mt-2">
-                            <span class="font-semibold block text-gray-700">Задача:</span>
+                        <h4 class="text-lg font-semibold text-zinc-800 mb-3">Разработка документации</h4>
+                        <p class="text-sm text-zinc-600 mt-2">
+                            <span class="font-semibold block text-zinc-700">Задача:</span>
                             Создать простые, понятные и доступные инструкции для персонала.
                             <br><br>
-                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <span class="font-semibold block text-zinc-700">Действия:</span>
                             <ul class="list-disc list-inside ml-1">
                                 <li><b>"Листы ошибок":</b> По аналогии с проектом бадьямойки Nieros, создание документов "Что делать, если...". (Напр., "Мигает красная лампа на Viper Touch", "Ошибка 'Sensor Failure'").</li>
                                 <li><b>Чек-листы:</b> Разработка чек-листов для зоотехников (ежедневный обход, проверка уставок).</li>
@@ -89,12 +143,12 @@
                         </p>
                     </div>
                     <div class="screenshot-card">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Практическое обучение ("В полях")</h4>
-                        <p class="text-sm text-gray-600 mt-2">
-                            <span class="font-semibold block text-gray-700">Задача:</span>
+                        <h4 class="text-lg font-semibold text-zinc-800 mb-3">Практическое обучение ("В полях")</h4>
+                        <p class="text-sm text-zinc-600 mt-2">
+                            <span class="font-semibold block text-zinc-700">Задача:</span>
                             Научить инженеров и зоотехников не бояться оборудования и правильно с ним работать.
                             <br><br>
-                            <span class="font-semibold block text-gray-700">Действия:</span>
+                            <span class="font-semibold block text-zinc-700">Действия:</span>
                             <ul class="list-disc list-inside ml-1">
                                 <li><b>Регулярные обходы:</b> Совместные обходы птичников с зоотехниками с объяснением "на пальцах", почему система работает так, а не иначе.</li>
                                 <li><b>Наставничество:</b> "Погружение" новых инженеров АСУ, передача знаний по поиску неисправностей, чтению схем, специфике контроллеров.</li>
@@ -105,31 +159,43 @@
                 </div>
             </section>
 
-            <!-- 3. Ключевые результаты и выводы -->
-            <section>
+            <section class="reveal-item">
                 <h2 class="section-title">Результаты и выводы</h2>
-                <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-400">
-                    <h4 class="text-xl font-semibold text-blue-800 mb-3">Ключевой вклад:</h4>
-                    <p class="text-blue-700">
+                <div class="bg-emerald-50 p-6 rounded-xl border-l-4 border-emerald-400">
+                    <h4 class="text-base font-semibold text-emerald-800 mb-2">Ключевой вклад:</h4>
+                    <p class="text-sm text-emerald-700 leading-relaxed">
                         Этот проект подчеркивает компетенции ведущего инженера как наставника и методолога. Успешная автоматизация — это не только работающее "железо", но и обученный персонал, который может его правильно эксплуатировать. Этот опыт доказывает способность развивать команду и создавать устойчивые рабочие процессы.
                     </p>
                 </div>
-                <ul class="mt-6 list-disc list-inside space-y-2 text-green-700">
-                    <li><span class="font-semibold text-green-800">Снижение ошибок:</span> Значительно уменьшилось число сбоев, вызванных "человеческим фактором".</li>
-                    <li><span class="font-semibold text-green-800">Быстрая адаптация:</span> Новые инженеры АСУ быстрее входили в курс дела.</li>
-                    <li><span class="font-semibold text-green-800">Повышение вовлеченности:</span> Зоотехники стали лучше понимать, как их действия влияют на микроклимат, и начали более осознанно подходить к настройкам.</li>
+                <ul class="mt-6 list-disc list-inside space-y-2">
+                    <li><span class="font-semibold text-zinc-900">Снижение ошибок:</span><span class="text-zinc-600"> Значительно уменьшилось число сбоев, вызванных "человеческим фактором".</span></li>
+                    <li><span class="font-semibold text-zinc-900">Быстрая адаптация:</span><span class="text-zinc-600"> Новые инженеры АСУ быстрее входили в курс дела.</span></li>
+                    <li><span class="font-semibold text-zinc-900">Повышение вовлеченности:</span><span class="text-zinc-600"> Зоотехники стали лучше понимать, как их действия влияют на микроклимат, и начали более осознанно подходить к настройкам.</span></li>
                 </ul>
             </section>
 
         </div>
     </main>
 
-    <!-- Футер -->
-    <footer class="border-t border-gray-200 bg-white mt-12">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500">
+    <footer class="border-t border-zinc-100 bg-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-zinc-400">
             Этот проект является частью портфолио Людвига К.А.
         </div>
     </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal-item').forEach(el => revealObserver.observe(el));
+    });
+    </script>
 
 </body>
 </html>

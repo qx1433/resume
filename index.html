@@ -3,17 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Интерактивное резюме | Людвиг Константин Анатольевич</title>
+    <title>Людвиг К.А. | Инженер АСУ ТП / IIoT</title>
+    <meta name="description" content="Портфолио инженера АСУ ТП. Промышленная автоматизация, IIoT, веб-разработка, цифровизация производства.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Geist', 'system-ui', 'sans-serif'],
+                        mono: ['Geist Mono', 'monospace'],
+                    },
+                },
+            },
+        }
+    </script>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f9fafb;
-            color: #1f2937;
+            font-family: 'Geist', system-ui, sans-serif;
+            background-color: #fafafa;
+            color: #18181b;
+        }
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            pointer-events: none;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 200px;
         }
         .chart-container {
             position: relative;
@@ -42,27 +65,106 @@
             transform: translateX(-50%);
         }
         .nav-link {
-            @apply px-4 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-blue-600 transition-colors;
+            position: relative;
+            padding: 0.5rem 1rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: #71717a;
+            border-radius: 0.5rem;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-link:hover {
+            color: #18181b;
+            background-color: rgba(0,0,0,0.03);
         }
         .nav-link.active {
-            @apply text-blue-600 bg-gray-100;
+            color: #059669;
+            background-color: #ecfdf5;
         }
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .btn-primary {
+            display: inline-block;
+            background-color: #059669;
+            color: #fff;
+            font-weight: 600;
+            padding: 0.875rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 24px -8px rgba(5,150,105,0.25);
+        }
+        .btn-primary:hover {
+            background-color: #047857;
+            transform: translateY(-1px);
+            box-shadow: 0 12px 32px -8px rgba(5,150,105,0.35);
+        }
+        .btn-primary:active {
+            transform: translateY(1px) scale(0.98);
+        }
+        .card-surface {
+            background-color: #fff;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.04);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-surface:hover {
+            box-shadow: 0 24px 48px -12px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        .card-surface:active {
+            transform: translateY(0) scale(0.99);
+        }
+        .skill-tag {
+            display: inline-block;
+            padding: 0.375rem 0.875rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            background-color: #f0fdf4;
+            color: #166534;
+            border: 1px solid #dcfce7;
+            transition: all 0.2s ease;
+        }
+        .skill-tag:hover {
+            background-color: #dcfce7;
+        }
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #059669;
+        }
+        .stagger-1 { transition-delay: 0ms; }
+        .stagger-2 { transition-delay: 80ms; }
+        .stagger-3 { transition-delay: 160ms; }
+        .stagger-4 { transition-delay: 240ms; }
+        .stagger-5 { transition-delay: 320ms; }
+        .stagger-6 { transition-delay: 400ms; }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-zinc-50 antialiased">
     
-    <!-- Анимированный фон -->
-    <canvas id="bg-canvas" style="position:fixed;top:0;left:0;z-index:-1;width:100%;height:100%;"></canvas>
+    <div class="grain-overlay" aria-hidden="true"></div>
 
-    <nav class="sticky top-0 bg-white shadow-sm z-50 border-b border-gray-200">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="sticky top-0 bg-white/80 backdrop-blur-xl z-40 border-b border-zinc-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="text-xl font-bold text-blue-600">Л.К.А.</span>
-                    <span class="ml-3 text-lg font-semibold text-gray-800 hidden sm:block">Портфолио</span>
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <span class="text-lg font-bold tracking-tight text-zinc-900">Л.К.А.</span>
+                    <span class="text-sm font-medium text-zinc-400 hidden sm:block">/</span>
+                    <span class="text-sm font-medium text-zinc-500 hidden sm:block">Портфолио</span>
                 </div>
                 <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4" id="desktop-nav">
+                    <div class="flex items-center gap-1" id="desktop-nav">
                         <a href="#home" class="nav-link active">Главная</a>
                         <a href="#skills" class="nav-link">Навыки</a>
                         <a href="#ai-skills" class="nav-link">Цифровизация</a>
@@ -72,20 +174,20 @@
                     </div>
                 </div>
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-btn" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
+                    <button type="button" id="mobile-menu-btn" class="bg-transparent inline-flex items-center justify-center p-2 rounded-lg text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500 transition-colors" aria-controls="mobile-menu" aria-expanded="false">
                         <span class="sr-only">Открыть меню</span>
-                        <svg id="menu-icon-open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <svg id="menu-icon-open" class="block h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                         </svg>
-                        <svg id="menu-icon-close" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <svg id="menu-icon-close" class="hidden h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
-        <div class="md:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div class="md:hidden hidden border-t border-zinc-100" id="mobile-menu">
+            <div class="px-4 pt-3 pb-4 space-y-1">
                 <a href="#home" class="nav-link block">Главная</a>
                 <a href="#skills" class="nav-link block">Навыки</a>
                 <a href="#ai-skills" class="nav-link block">Цифровизация</a>
@@ -96,125 +198,125 @@
         </div>
     </nav>
 
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <section id="home" class="py-16 md:py-24">
-            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 lg:gap-16">
-                <div class="flex-shrink-0">
-                    <img src="https://qx1433.github.io/resume/image1.jpg?text=ЛКА" 
-                            alt="Фото Людвиг Константин Анатольевич" 
-                            class="rounded-full w-48 h-48 md:w-64 md:h-64 object-cover shadow-xl mx-auto border-4 border-white">
+        <section id="home" class="min-h-[100dvh] flex items-center py-16 md:py-0">
+            <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                <div class="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-br from-emerald-100/50 to-teal-50/50 rounded-3xl blur-2xl" aria-hidden="true"></div>
+                        <img src="https://qx1433.github.io/resume/image1.jpg?text=ЛКА" 
+                                alt="Фото Людвиг Константин Анатольевич" 
+                                class="relative rounded-2xl w-56 h-56 md:w-72 md:h-72 object-cover shadow-lg border border-white/50">
+                    </div>
                 </div>
                 
-                <div class="text-center md:text-left">
-                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">Людвиг Константин Анатольевич</h1>
-                    <p class="mt-4 text-xl md:text-2xl font-semibold text-blue-600">Инженер АСУ ТП / IIoT / Веб-разработчик</p>
-                    <p class="mt-6 max-w-2xl text-lg text-gray-600">
-                        Инженер-практик на стыке АСУ ТП, промышленного интернета вещей (IIoT) и IT-разработки. Специализируюсь на автоматизации процессов птицеводства и разработке внутренних цифровых продуктов для производства. Умение не только программировать ПЛК и настраивать климатическое оборудование (BigDutchman, Fancom, SKOV), но и оцифровывать бизнес-процессы: от PWA-приложений для складского учёта до внедрения корпоративных ИИ-ассистентов.
+                <div class="lg:col-span-7 order-2 lg:order-1">
+                    <span class="section-label reveal-item">Инженер АСУ ТП / IIoT / Веб-разработчик</span>
+                    <h1 class="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-900 tracking-tighter leading-none reveal-item stagger-1">Людвиг Константин Анатольевич</h1>
+                    <p class="mt-6 max-w-[60ch] text-lg text-zinc-500 leading-relaxed reveal-item stagger-2">
+                        Инженер-практик на стыке АСУ ТП, промышленного интернета вещей и IT-разработки. Автоматизирую процессы птицеводства и создаю цифровые продукты для производства: от PWA-приложений для складского учёта до корпоративных ИИ-ассистентов.
                     </p>
-                    <div class="mt-10 flex flex-col sm:flex-row justify-center md:justify-start items-center gap-6 text-gray-700">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-2">📱</span>
-                            <span>+7(911)457-99-37</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-2">📧</span>
-                            <span>qx1433@gmail.com</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-2">📍</span>
-                            <span>г. Калининград (готов к переезду в Москву)</span>
-                        </div>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4 text-zinc-600 reveal-item stagger-3">
+                        <a href="tel:+79114579937" class="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 hover:text-emerald-600 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            +7 (911) 457-99-37
+                        </a>
+                        <a href="mailto:qx1433@gmail.com" class="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 hover:text-emerald-600 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            qx1433@gmail.com
+                        </a>
+                        <span class="inline-flex items-center gap-2 text-sm font-medium text-zinc-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Калининград (готов к переезду)
+                        </span>
                     </div>
-                    <a href="#projects" class="mt-12 inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg hover:bg-blue-700 transition-colors">
-                        Посмотреть проекты
-                    </a>
-                    <a href="https://docs.google.com/document/d/1PWpTa22JJquulCzUj6AQ2EKvSs0MTe2mWzSA5GxLfqE/edit?usp=sharing" target="_blank" class="mt-6 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
-                        <!-- Иконка документа -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                            <polyline points="10 9 9 9 8 9"></polyline>
-                        </svg>
-                        <span>Скачать версию для печати (Google Drive)</span>
-                    </a>
-                    
+                    <div class="mt-10 flex flex-wrap gap-4 reveal-item stagger-4">
+                        <a href="#projects" class="btn-primary">Проекты</a>
+                        <a href="https://docs.google.com/document/d/1PWpTa22JJquulCzUj6AQ2EKvSs0MTe2mWzSA5GxLfqE/edit?usp=sharing" target="_blank" class="inline-flex items-center gap-2 font-medium text-zinc-700 hover:text-emerald-600 border border-zinc-200 rounded-xl px-5 py-3 transition-all duration-200 hover:border-emerald-200 hover:bg-emerald-50/50">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            Версия для печати
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="py-16 md:py-24 bg-white rounded-2xl shadow-xl overflow-hidden">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900">Ключевые компетенции</h2>
-                <p class="mt-4 text-lg text-gray-600 text-center max-w-2xl mx-auto">
-                    Визуальное представление баланса навыков и детальный список технических компетенций.
-                </p>
-
-                <div class="mt-8 flex flex-wrap justify-center gap-2">
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Siemens (Step7, TIA Portal, Logo)</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Owen (CodeSys)</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">МЭК 61131-3 (ST, FBD, SCL)</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">SCADA</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">BigDutchman</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">DACS</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Fancom</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">SKOV</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Vanilla JS</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Vite</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Firebase</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">PWA</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">IndexedDB (Dexie)</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">REST API</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Telegram API</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Chart.js</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Change Management</span>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Obsidian / PARA</span>
+        <section id="skills" class="py-20 md:py-28">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-left">
+                    <span class="section-label reveal-item">01 / Компетенции</span>
+                    <h2 class="mt-3 text-3xl md:text-4xl font-bold text-zinc-900 tracking-tight reveal-item stagger-1">Ключевые навыки</h2>
+                    <p class="mt-4 text-base text-zinc-500 max-w-[55ch] leading-relaxed reveal-item stagger-2">
+                        Баланс компетенций и детальный список технических навыков, накопленных за годы работы на стыке промышленности и IT.
+                    </p>
                 </div>
 
-                <div class="mt-12 md:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div class="chart-container">
+                <div class="mt-8 flex flex-wrap gap-2 reveal-item stagger-3">
+                    <span class="skill-tag">Siemens (Step7, TIA Portal, Logo)</span>
+                    <span class="skill-tag">Owen (CodeSys)</span>
+                    <span class="skill-tag">МЭК 61131-3 (ST, FBD, SCL)</span>
+                    <span class="skill-tag">SCADA</span>
+                    <span class="skill-tag">BigDutchman</span>
+                    <span class="skill-tag">DACS</span>
+                    <span class="skill-tag">Fancom</span>
+                    <span class="skill-tag">SKOV</span>
+                    <span class="skill-tag">Vanilla JS</span>
+                    <span class="skill-tag">Vite</span>
+                    <span class="skill-tag">Firebase</span>
+                    <span class="skill-tag">PWA</span>
+                    <span class="skill-tag">IndexedDB (Dexie)</span>
+                    <span class="skill-tag">REST API</span>
+                    <span class="skill-tag">Telegram API</span>
+                    <span class="skill-tag">Chart.js</span>
+                    <span class="skill-tag">Change Management</span>
+                    <span class="skill-tag">Obsidian / PARA</span>
+                </div>
+
+                <div class="mt-16 md:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="chart-container reveal-item">
                         <div id="skillsChart"></div>
                     </div>
                     <div class="space-y-8">
-                        <div>
-                            <h3 class="text-xl font-semibold text-blue-600">Системы микроклимата (Приоритет)</h3>
-                            <ul class="mt-3 list-disc list-inside space-y-1 text-gray-700">
-                                <li>Экспертное владение: BigDutchman, DACS, Fancom, Skov</li>
-                                <li>Настройка и оптимизация параметров</li>
-                                <li>Интеграция компонентов климатических систем</li>
+                        <div class="reveal-item stagger-1">
+                            <h3 class="text-lg font-semibold text-zinc-900">Системы микроклимата</h3>
+                            <span class="text-xs font-mono text-emerald-600 tracking-wide uppercase">Приоритет</span>
+                            <ul class="mt-3 space-y-1.5 text-zinc-600 text-sm">
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>Экспертное владение: BigDutchman, DACS, Fancom, Skov</li>
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>Настройка и оптимизация параметров</li>
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>Интеграция компонентов климатических систем</li>
                             </ul>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-blue-600">Программирование ПЛК</h3>
-                            <ul class="mt-3 list-disc list-inside space-y-1 text-gray-700">
-                                <li>Разработка для Owen (CodeSys) и Siemens (Step7, Logo)</li>
-                                <li>Владение языками МЭК 61131-3 (ST, LD, FBD, SCL)</li>
-                                <li>Специализация на языке ST (Structured Text)</li>
+                        <div class="reveal-item stagger-2">
+                            <h3 class="text-lg font-semibold text-zinc-900">Программирование ПЛК</h3>
+                            <ul class="mt-3 space-y-1.5 text-zinc-600 text-sm">
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 flex-shrink-0"></span>Разработка для Owen (CodeSys) и Siemens (Step7, Logo)</li>
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 flex-shrink-0"></span>Владение языками МЭК 61131-3 (ST, LD, FBD, SCL)</li>
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 flex-shrink-0"></span>Специализация на языке ST (Structured Text)</li>
                             </ul>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-blue-600">Электротехника и Схемотехника</h3>
-                            <ul class="mt-3 list-disc list-inside space-y-1 text-gray-700">
-                                <li>Профессиональное чтение и анализ электрических схем</li>
-                                <li>Пуско-наладка автоматизированных систем</li>
-                                <li>Диагностика и устранение неисправностей</li>
+                        <div class="reveal-item stagger-3">
+                            <h3 class="text-lg font-semibold text-zinc-900">Электротехника и схемотехника</h3>
+                            <ul class="mt-3 space-y-1.5 text-zinc-600 text-sm">
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 flex-shrink-0"></span>Профессиональное чтение и анализ электрических схем</li>
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 flex-shrink-0"></span>Пуско-наладка автоматизированных систем</li>
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 flex-shrink-0"></span>Диагностика и устранение неисправностей</li>
                             </ul>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-blue-600">Веб-разработка и IIoT</h3>
-                            <ul class="mt-3 list-disc list-inside space-y-1 text-gray-700">
-                                <li>Разработка PWA-приложений (Vanilla JS, Firebase, IndexedDB)</li>
-                                <li>Интеграция REST API, Telegram API, Google API</li>
-                                <li>Офлайн-режим, QR-маркировка, ролевая модель</li>
+                        <div class="reveal-item stagger-4">
+                            <h3 class="text-lg font-semibold text-zinc-900">Веб-разработка и IIoT</h3>
+                            <ul class="mt-3 space-y-1.5 text-zinc-600 text-sm">
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 flex-shrink-0"></span>Разработка PWA-приложений (Vanilla JS, Firebase, IndexedDB)</li>
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 flex-shrink-0"></span>Интеграция REST API, Telegram API, Google API</li>
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 flex-shrink-0"></span>Офлайн-режим, QR-маркировка, ролевая модель</li>
                             </ul>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-blue-600">Отраслевая экспертиза (Птицеводство)</h3>
-                            <ul class="mt-3 list-disc list-inside space-y-1 text-gray-700">
-                                <li>Глубокое понимание техпроцессов выращивания бройлеров</li>
-                                <li>Автоматизация кормления, поения и вентиляции</li>
+                        <div class="reveal-item stagger-5">
+                            <h3 class="text-lg font-semibold text-zinc-900">Отраслевая экспертиза (Птицеводство)</h3>
+                            <ul class="mt-3 space-y-1.5 text-zinc-600 text-sm">
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 flex-shrink-0"></span>Глубокое понимание техпроцессов выращивания бройлеров</li>
+                                <li class="flex items-start gap-2"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-300 flex-shrink-0"></span>Автоматизация кормления, поения и вентиляции</li>
                             </ul>
                         </div>
                     </div>
@@ -222,203 +324,164 @@
             </div>
         </section>
         
-        <section id="ai-skills" class="py-16 md:py-24">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900">Цифровизация и IT-интеграция</h2>
-            <p class="mt-4 text-lg text-gray-600 text-center max-w-2xl mx-auto">
-                Практическое применение IT-инструментов и ИИ для автоматизации бизнес-процессов на производстве.
-            </p>
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <div class="bg-white p-6 rounded-2xl shadow-xl">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Интеграция API и Автоматизация</h3>
-                    <p class="text-gray-700">Разработка Telegram-ботов, интеграция с Google API для автоматического сбора данных и генерации отчётов в Google Sheets/Excel. Администрирование Bitrix24: добавление сотрудников, обучение персонала работе с платформой.</p>
+        <section id="ai-skills" class="py-20 md:py-28">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-left">
+                    <span class="section-label reveal-item">02 / IT-интеграция</span>
+                    <h2 class="mt-3 text-3xl md:text-4xl font-bold text-zinc-900 tracking-tight reveal-item stagger-1">Цифровизация производства</h2>
+                    <p class="mt-4 text-base text-zinc-500 max-w-[55ch] leading-relaxed reveal-item stagger-2">
+                        Практическое применение IT-инструментов и ИИ для автоматизации бизнес-процессов.
+                    </p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-xl">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">ИИ-ассистент на базе LLM</h3>
-                    <p class="text-gray-700">Разработка и администрирование корпоративного чат-бота, отвечающего на вопросы инженеров строго по загруженным PDF-руководствам (Siemens, Fancom и др.) и внутренним регламентам. Ускорение поиска инструкций и онбординга новых сотрудников.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="py-16 md:py-24 bg-white rounded-2xl shadow-xl overflow-hidden">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900">Ключевые проекты</h2>
-            <p class="mt-4 text-lg text-gray-600 text-center max-w-2xl mx-auto">
-                Практические примеры реализованных задач. Нажмите на карточку, чтобы узнать подробности.
-            </p>
-            <div id="project-grid" class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
-            </div>
-        </section>
-
-        <section id="experience" class="py-16 md:py-24">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900">Опыт работы</h2>
-            <p class="mt-4 text-lg text-gray-600 text-center max-w-2xl mx-auto">
-                Хронология карьерного пути от электромонтажника до инженера по АСУ и цифровизации.
-            </p>
-            <div id="timeline-container" class="mt-16 max-w-3xl mx-auto">
-                <div class="relative border-l-2 border-blue-200">
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 reveal-item stagger-3">
+                    <div class="card-surface p-8">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-zinc-900">Интеграция API и автоматизация</h3>
+                        <p class="mt-3 text-sm text-zinc-600 leading-relaxed">Разработка Telegram-ботов, интеграция с Google API для автоматического сбора данных и генерации отчётов. Администрирование Bitrix24: обучение персонала, настройка прав доступа, миграция процессов.</p>
+                    </div>
+                    <div class="card-surface p-8">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"></path><line x1="9" y1="21" x2="15" y2="21"></line></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-zinc-900">ИИ-ассистент на базе LLM</h3>
+                        <p class="mt-3 text-sm text-zinc-600 leading-relaxed">Корпоративный чат-бот, отвечающий на вопросы инженеров строго по загруженным PDF-руководствам (Siemens, Fancom) и внутренним регламентам. Ускорение поиска инструкций и онбординга.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="education" class="py-16 md:py-24">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900">Образование и P.S.</h2>
-            <div class="mt-12 max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-xl">
-                    <h3 class="text-2xl font-bold text-blue-600">Образование</h3>
-                    <p class="mt-4 text-lg font-semibold text-gray-900">«Красноярский политехнический техникум» (2016) — Диплом с отличием</p>
-                    <p class="mt-2 text-gray-700">
-                        <span class="font-semibold">Специальность:</span> «Монтаж, наладка и эксплуатация электрооборудования промышленных и гражданских зданий»
-                    </p>
-                    <p class="mt-1 text-gray-700">
-                        <span class="font-semibold">Квалификация:</span> Техник - электрик
-                    </p>
-                    <p class="mt-3 text-sm text-gray-600 italic">
-                        Дополнительно: Создал обучающие стенды (макет подстанции на Siemens LOGO; стенд для Simatic S7-1200).
-                    </p>
-                    <div class="mt-6 pt-6 border-t border-gray-200">
-                        <p class="text-lg font-semibold text-gray-900">Московский технологический институт (МТИ)</p>
-                        <p class="mt-1 text-gray-700">
-                            <span class="font-semibold">Специальность:</span> 27.03.04 Управление в технических системах
-                        </p>
-                        <p class="mt-1 text-gray-700">
-                            <span class="font-semibold">Форма:</span> Заочная
-                        </p>
-                        <p class="mt-1 text-sm text-blue-600 font-semibold">
-                            📅 Статус: Студент (сентябрь 2026 — н.в., ожидаемое окончание: 2029)
-                        </p>
-                        <p class="mt-2 text-sm text-gray-600 italic">
-                            Ключевые дисциплины: Теория автоматического управления (ТАУ), ПЛК-программирование, промышленные сети и протоколы (Modbus, Profibus, OPC UA), микропроцессорные системы.
-                        </p>
-                        <p class="mt-3 text-sm text-gray-600">
-                            <span class="font-semibold">Допуски:</span> III группа по электробезопасности (оперативно-ремонтный персонал)
-                        </p>
+        <section id="projects" class="py-20 md:py-28">
+            <div class="text-left">
+                <span class="section-label reveal-item">03 / Портфолио</span>
+                <h2 class="mt-3 text-3xl md:text-4xl font-bold text-zinc-900 tracking-tight reveal-item stagger-1">Реализованные проекты</h2>
+                <p class="mt-4 text-base text-zinc-500 max-w-[55ch] leading-relaxed reveal-item stagger-2">
+                    Практические примеры выполненных задач. Нажмите на карточку, чтобы узнать подробности.
+                </p>
+            </div>
+            <div id="project-grid" class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+        </section>
+
+        <section id="experience" class="py-20 md:py-28">
+            <div class="text-left">
+                <span class="section-label reveal-item">04 / Карьера</span>
+                <h2 class="mt-3 text-3xl md:text-4xl font-bold text-zinc-900 tracking-tight reveal-item stagger-1">Опыт работы</h2>
+                <p class="mt-4 text-base text-zinc-500 max-w-[55ch] leading-relaxed reveal-item stagger-2">
+                    Хронология карьерного пути от электромонтажника до инженера по АСУ и цифровизации.
+                </p>
+            </div>
+            <div id="timeline-container" class="mt-16 max-w-3xl">
+                <div class="relative border-l-2 border-zinc-200">
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="py-20 md:py-28">
+            <div class="text-left">
+                <span class="section-label reveal-item">05 / Образование</span>
+                <h2 class="mt-3 text-3xl md:text-4xl font-bold text-zinc-900 tracking-tight reveal-item stagger-1">Образование и дополнительно</h2>
+            </div>
+            <div class="mt-12 max-w-5xl grid md:grid-cols-2 gap-6">
+                <div class="card-surface p-8 reveal-item stagger-1">
+                    <h3 class="text-xl font-bold text-zinc-900">Образование</h3>
+                    <div class="mt-6 space-y-6">
+                        <div class="pb-6 border-b border-zinc-100">
+                            <p class="text-base font-semibold text-zinc-900">Красноярский политехнический техникум (2016)</p>
+                            <p class="mt-1 text-xs font-mono text-emerald-600">Диплом с отличием</p>
+                            <p class="mt-2 text-sm text-zinc-600">Монтаж, наладка и эксплуатация электрооборудования промышленных и гражданских зданий</p>
+                            <p class="mt-1 text-sm text-zinc-500">Квалификация: Техник-электрик</p>
+                            <p class="mt-3 text-sm text-zinc-500 italic">Создал обучающие стенды: макет подстанции на Siemens LOGO, стенд для Simatic S7-1200.</p>
+                        </div>
+                        <div>
+                            <p class="text-base font-semibold text-zinc-900">Московский технологический институт (МТИ)</p>
+                            <p class="mt-1 text-xs font-mono text-emerald-600">Студент (сентябрь 2026 — н.в., окончание: 2029)</p>
+                            <p class="mt-2 text-sm text-zinc-600">27.03.04 Управление в технических системах, заочная форма</p>
+                            <p class="mt-2 text-sm text-zinc-500">ТАУ, ПЛК-программирование, Modbus, Profibus, OPC UA, микропроцессорные системы.</p>
+                            <p class="mt-2 text-sm text-zinc-500">III группа по электробезопасности (оперативно-ремонтный персонал).</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="bg-white p-8 rounded-2xl shadow-xl">
-                    <h3 class="text-2xl font-bold text-blue-600">Языки и Увлечения</h3>
-                    <h4 class="mt-4 text-lg font-semibold text-gray-900">Языки</h4>
-                    <ul class="mt-2 space-y-2 text-gray-700">
-                        <li class="flex items-center">
-                            <span class="font-semibold w-24">Русский:</span>
-                            <span>Родной</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="font-semibold w-24">Английский:</span>
-                            <span>B1 (чтение технической документации, переписка с вендорами)</span>
-                        </li>
-                    </ul>
-                    <h4 class="mt-6 text-lg font-semibold text-gray-900">Хобби</h4>
-                    <ul class="mt-2 list-disc list-inside space-y-1 text-gray-700">
-                        <li>Управление знаниями (Zettelkasten, PARA, Obsidian)</li>
-                        <li>Управление задачами (Singularity, Bitrix)</li>
-                        <li>Структурирование информации (интеллект-карты)</li>
-                        <li>Графический дизайн (Photoshop)</li>
-                        <li>Разбор новинок IT и технологий</li>
-                    </ul>
+                <div class="card-surface p-8 reveal-item stagger-2">
+                    <h3 class="text-xl font-bold text-zinc-900">Языки и увлечения</h3>
+                    <div class="mt-6">
+                        <h4 class="text-sm font-semibold text-zinc-900">Языки</h4>
+                        <div class="mt-3 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-zinc-600">Русский</span>
+                                <span class="text-xs font-mono text-zinc-400">Родной</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-zinc-600">Английский</span>
+                                <span class="text-xs font-mono text-zinc-400">B1</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h4 class="text-sm font-semibold text-zinc-900">Хобби</h4>
+                        <ul class="mt-3 space-y-2 text-sm text-zinc-600">
+                            <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-zinc-300 flex-shrink-0"></span>Управление знаниями (Zettelkasten, PARA, Obsidian)</li>
+                            <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-zinc-300 flex-shrink-0"></span>Управление задачами (Singularity, Bitrix)</li>
+                            <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-zinc-300 flex-shrink-0"></span>Структурирование информации (интеллект-карты)</li>
+                            <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-zinc-300 flex-shrink-0"></span>Графический дизайн (Photoshop)</li>
+                            <li class="flex items-start gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-zinc-300 flex-shrink-0"></span>Разбор новинок IT и технологий</li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>
-            <div class="mt-8 max-w-4xl mx-auto bg-blue-600 text-white p-8 rounded-2xl shadow-xl">
-                <h3 class="text-2xl font-bold">P.S.</h3>
-                    <p class="mt-4 text-lg text-blue-100">
-                        Открыт к обсуждению позиций инженера АСУТП / специалиста по цифровизации в агропромышленном секторе. В настоящее время углубляю теоретическую базу через обучение в МТИ, фокусируясь на современных методах управления и промышленной интеграции. Готов предоставить портфолио проектов и рекомендации по запросу.
-                    </p>
+            <div class="mt-8 max-w-5xl card-surface p-8 md:p-10 reveal-item stagger-3" style="background: linear-gradient(135deg, #059669 0%, #047857 100%); border: none;">
+                <h3 class="text-xl font-bold text-white">Контактная информация</h3>
+                <p class="mt-4 text-base text-emerald-100 leading-relaxed max-w-[60ch]">
+                    Открыт к обсуждению позиций инженера АСУТП / специалиста по цифровизации в агропромышленном секторе. Углубляю теоретическую базу через обучение в МТИ, фокусируясь на современных методах управления и промышленной интеграции. Портфолио проектов и рекомендации предоставлю по запросу.
+                </p>
+                <div class="mt-6 flex flex-wrap gap-4">
+                    <a href="tel:+79114579937" class="inline-flex items-center gap-2 text-sm font-medium text-white/90 hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        +7 (911) 457-99-37
+                    </a>
+                    <a href="mailto:qx1433@gmail.com" class="inline-flex items-center gap-2 text-sm font-medium text-white/90 hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        qx1433@gmail.com
+                    </a>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="border-t border-gray-200 bg-white">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500">
-            Интерактивное резюме создано → Людвиг Константином Анатольевичем
+    <footer class="border-t border-zinc-100 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-zinc-400">
+            <span>Людвиг Константин Анатольевич</span>
+            <span class="font-mono text-xs">2026</span>
         </div>
     </footer>
     
-    <!-- Кнопка "Наверх" -->
     <button id="scroll-to-top-btn" title="Наверх"
-            class="fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-opacity duration-300 z-50 opacity-0 invisible">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+            class="fixed bottom-6 right-6 bg-zinc-900 text-white p-3 rounded-xl shadow-lg hover:bg-zinc-800 transition-all duration-300 z-40 opacity-0 invisible hover:scale-105 active:scale-95">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
         </svg>
     </button>
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- Анимированный фон ---
-            const canvas = document.getElementById('bg-canvas');
-            const ctx = canvas.getContext('2d');
-            
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            const particles = [];
-            const particleCount = 80;
-            const connectionDistance = 120;
-            
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.vx = (Math.random() - 0.5) * 0.3;
-                    this.vy = (Math.random() - 0.5) * 0.3;
-                }
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
-                    if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
-                }
-                draw() {
-                    ctx.fillStyle = 'rgba(59, 130, 246, 0.4)';
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-            
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-            
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (distance < connectionDistance) {
-                            ctx.strokeStyle = `rgba(59, 130, 246, ${0.15 * (1 - distance / connectionDistance)})`;
-                            ctx.lineWidth = 0.8;
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
+            // --- Scroll reveal ---
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        revealObserver.unobserve(entry.target);
                     }
-                }
-                
-                particles.forEach(particle => {
-                    particle.update();
-                    particle.draw();
                 });
-                
-                requestAnimationFrame(animate);
-            }
-            
-            animate();
-            
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.reveal-item').forEach(el => revealObserver.observe(el));
 
             // --- Навигация ---
-
-            // Мобильное меню
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const menuIconOpen = document.getElementById('menu-icon-open');
@@ -432,14 +495,13 @@
                 menuIconClose.classList.toggle('hidden');
             });
 
-            // Закрытие мобильного меню при клике на ссылку
             mobileMenu.addEventListener('click', (e) => {
                 if (e.target.tagName === 'A') {
                     mobileMenuBtn.click();
                 }
             });
 
-            // Плавный скролл
+            // Smooth scroll
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -453,7 +515,27 @@
                 });
             });
 
-            // --- Радарная диаграмма навыков (ApexCharts) ---
+            // Active nav highlight
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            sections.forEach(section => navObserver.observe(section));
+
+            // --- Радарная диаграмма (ApexCharts) ---
             var skillsOptions = {
                 series: [{
                     name: 'Уровень',
@@ -463,30 +545,40 @@
                     height: 500,
                     type: 'radar',
                     toolbar: { show: false },
-                    parentHeightOffset: 0
+                    parentHeightOffset: 0,
+                    animations: {
+                        enabled: true,
+                        easing: 'easeinout',
+                        speed: 800,
+                        animateGradually: {
+                            enabled: true,
+                            delay: 100
+                        }
+                    }
                 },
-                colors: ['#3b82f6'],
+                colors: ['#059669'],
                 fill: {
                     type: 'gradient',
                     gradient: {
                         shade: 'light',
                         type: 'vertical',
-                        shadeIntensity: 0.2,
-                        opacityFrom: 0.4,
-                        opacityTo: 0.1
+                        shadeIntensity: 0.1,
+                        opacityFrom: 0.35,
+                        opacityTo: 0.05,
+                        stops: [0, 100]
                     }
                 },
                 stroke: {
                     width: 2,
-                    colors: ['#3b82f6']
+                    colors: ['#059669']
                 },
                 markers: {
-                    size: 5,
-                    colors: ['#3b82f6'],
+                    size: 4,
+                    colors: ['#059669'],
                     strokeColors: '#fff',
                     strokeWidth: 2,
                     hover: {
-                        size: 7
+                        size: 6
                     }
                 },
                 xaxis: {
@@ -501,7 +593,7 @@
                     ],
                     labels: {
                         style: {
-                            colors: ['#374151'],
+                            colors: ['#71717a'],
                             fontSize: '11px',
                             fontWeight: 500
                         }
@@ -518,8 +610,8 @@
                 plotOptions: {
                     radar: {
                         polygons: {
-                            strokeColors: 'rgba(0, 0, 0, 0.08)',
-                            connectorColors: 'rgba(0, 0, 0, 0.08)'
+                            strokeColors: 'rgba(0, 0, 0, 0.05)',
+                            connectorColors: 'rgba(0, 0, 0, 0.05)'
                         }
                     }
                 },
@@ -541,7 +633,7 @@
                             ],
                             labels: {
                                 style: {
-                                    colors: ['#374151'],
+                                    colors: ['#71717a'],
                                     fontSize: '10px',
                                     fontWeight: 400
                                 }
@@ -555,7 +647,7 @@
                             }
                         },
                         markers: {
-                            size: 4,
+                            size: 3,
                             strokeWidth: 1
                         }
                     }
@@ -565,158 +657,173 @@
             var skillsChart = new ApexCharts(document.querySelector("#skillsChart"), skillsOptions);
             skillsChart.render();
 
-            // --- Данные для проектов ---
+            // --- Данные проектов ---
             const projects = [
                 {
                     id: 1,
                     title: 'WMS PWA — Складской учёт',
                     description: 'PWA-приложение для учёта запчастей на 3 складах и 44 залах. QR-маркировка, офлайн-режим (IndexedDB), реалтайм-база (Firebase), ролевая модель, журнал аудита, дашборд (Chart.js), экспорт PDF/Excel.',
-                    link: '#'
+                    link: '#',
+                    tag: 'Веб'
                 },
                 {
                     id: 2,
                     title: 'PWA-платформа ТОиР',
                     description: 'Мобильное веб-приложение для фиксации поломок и трекинга ремонтов инженерами прямо в цехах. Офлайн-режим, мониторинг статусов.',
-                    link: '#'
+                    link: '#',
+                    tag: 'Веб'
                 },
                 {
                     id: 3,
                     title: 'Корпоративный ИИ-ассистент',
-                    description: 'Чат-бот на базе LLM, отвечающий на вопросы инженеров строго по загруженным PDF-руководствам (Siemens, Fancom и др.) и внутренним регламентам.',
-                    link: '#'
+                    description: 'Чат-бот на базе LLM, отвечающий на вопросы инженеров строго по загруженным PDF-руководствам (Siemens, Fancom) и внутренним регламентам.',
+                    link: '#',
+                    tag: 'ИИ'
                 },
                 {
                     id: 4,
                     title: 'Разработка и внедрение АСУ',
-                    description: 'Разработал систему управления микроклиматом на базе СПК107 (создание управляющей логики и графической визуализации).',
-                    link: 'keys_hid_49.html'
+                    description: 'Система управления микроклиматом на базе СПК107 (управляющая логика и графическая визуализация).',
+                    link: 'keys_hid_49.html',
+                    tag: 'ПЛК'
                 },
                 {
                     id: 5,
                     title: 'Модернизация оборудования',
-                    description: 'Провёл модернизацию системы аспирации, внедрив автоматическую логику управления для снижения энергозатрат и повышения эффективности.',
-                    link: 'case_study_modernization.html'
+                    description: 'Модернизация системы аспирации с внедрением автоматической логики управления для снижения энергозатрат.',
+                    link: 'case_study_modernization.html',
+                    tag: 'Автоматизация'
                 },
                 {
                     id: 6,
                     title: 'Настройка ПЛК и приводов',
-                    description: 'Настроил частотный преобразователь Danfoss FC51 и ПЛК MCX06D для прецизионного регулирования микроклиматических параметров.',
-                    link: 'keys_danfos_plk.html'
+                    description: 'Частотный преобразователь Danfoss FC51 и ПЛК MCX06D для прецизионного регулирования микроклимата.',
+                    link: 'keys_danfos_plk.html',
+                    tag: 'ПЛК'
                 },
                 {
                     id: 7,
-                    title: 'Автоматизация тех. процессов',
-                    description: 'Самостоятельно создал программу на ПЛК UNITRONICS JZ20-31 (язык LD) для автоматизации санпропускника НС NEROS.',
-                    link: 'case_study_unitronics.html'
+                    title: 'Автоматизация санпропускника',
+                    description: 'Программа на ПЛК UNITRONICS JZ20-31 (язык LD) для автоматизации санпропускника НС NEROS.',
+                    link: 'case_study_unitronics.html',
+                    tag: 'Автоматизация'
                 },
                 {
                     id: 8,
-                    title: 'Восстановление и автоматизация бадьямойки Nieros',
-                    description: 'Выполнил полное восстановление промышленной моющей машины Nieros CL-K 2x200D. Произвел замену оригинального контроллера на ПЛК ОВЕН ПЛК110-60. Самостоятельно разработал и написал новую управляющую логику (на ST/LD), включая маппинг всех входов/выходов (DI/DO) и циклы мойки. Также составил подробную инструкцию по эксплуатации и лист возможных ошибок для персонала.',
-                    link: 'case_study_nieros.html'
+                    title: 'Восстановление бадьямойки Nieros',
+                    description: 'Полное восстановление Nieros CL-K 2x200D. Замена контроллера на ПЛК ОВЕН ПЛК110-60, новая управляющая логика (ST/LD), маппинг I/O, инструкция для персонала.',
+                    link: 'case_study_nieros.html',
+                    tag: 'ПЛК'
                 },
                 {
                     id: 9,
                     title: 'Цифровизация (Bitrix)',
-                    description: 'Внедрил и адаптировал Bitrix для производственного коллектива (провел обучение главного инженера, инженеров, мастеров, управляющего).',
-                    link: 'case_study_bitrix.html'
+                    description: 'Внедрение и адаптация Bitrix для производственного коллектива: обучение главного инженера, инженеров, мастеров, управляющего.',
+                    link: 'case_study_bitrix.html',
+                    tag: 'Цифровизация'
                 },
                 {
                     id: 10,
-                    title: 'Цифровизация (Боты и аналитика)',
-                    description: 'Интегрировал Telegram-бота с Google Таблицами для автоматизации сбора, мониторинга и аналитики производственных данных.',
-                    link: 'case_study_bots.html'
+                    title: 'Боты и аналитика',
+                    description: 'Telegram-бот интегрирован с Google Таблицами для автоматизации сбора, мониторинга и аналитики производственных данных.',
+                    link: 'case_study_bots.html',
+                    tag: 'ИИ'
                 },
                 {
                     id: 11,
                     title: 'Обучение персонала',
-                    description: 'Проводил тренинги и практические обучения для зоотехников и новых инженеров АСУ. Вел обходы, практические консультации и разрабатывал инструкции.',
-                    link: 'case_study_training.html'
+                    description: 'Тренинги и практические обучения для зоотехников и новых инженеров АСУ. Обходы, консультации, разработка инструкций.',
+                    link: 'case_study_training.html',
+                    tag: 'Наставничество'
                 },
                 {
                     id: 12,
                     title: 'Диагностика освещения Swing 20',
-                    description: 'Поиск и устранение системной ошибки монтажа, которую все считали — нормальной работой оборудования.',
-                    link: 'case_study_swing20.html'
+                    description: 'Поиск и устранение системной ошибки монтажа, которую все считали нормальной работой оборудования.',
+                    link: 'case_study_swing20.html',
+                    tag: 'Диагностика'
                 }
             ];
 
             // --- Заполнение сетки проектов ---
             const projectGrid = document.getElementById('project-grid');
-            projects.forEach(project => {
+            projects.forEach((project, index) => {
                 const card = document.createElement('div');
-                card.className = 'bg-white p-6 rounded-2xl shadow-xl cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-1';
+                const staggerClass = `stagger-${(index % 6) + 1}`;
+                card.className = `card-surface p-6 cursor-pointer reveal-item ${staggerClass}`;
                 
-                let linkTarget = project.link; // Используем новую ссылку из данных
+                let linkTarget = project.link;
+                
+                const tagColors = {
+                    'Веб': 'bg-sky-50 text-sky-700 border-sky-100',
+                    'ИИ': 'bg-violet-50 text-violet-700 border-violet-100',
+                    'ПЛК': 'bg-amber-50 text-amber-700 border-amber-100',
+                    'Автоматизация': 'bg-emerald-50 text-emerald-700 border-emerald-100',
+                    'Цифровизация': 'bg-rose-50 text-rose-700 border-rose-100',
+                    'Наставничество': 'bg-teal-50 text-teal-700 border-teal-100',
+                    'Диагностика': 'bg-orange-50 text-orange-700 border-orange-100',
+                };
+                const tagClass = tagColors[project.tag] || 'bg-zinc-50 text-zinc-700 border-zinc-100';
                 
                 card.innerHTML = `
-                    <h3 class="text-xl font-bold text-gray-900">${project.title}</h3>
-                    <p class="mt-2 text-gray-600 line-clamp-3">${project.description}</p>
-                    <a href="${linkTarget}" class="mt-4 inline-block font-semibold text-blue-600 hover:text-blue-700">Подробнее →</a>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-medium px-2 py-0.5 border rounded-md ${tagClass}">${project.tag}</span>
+                    </div>
+                    <h3 class="text-base font-semibold text-zinc-900 leading-snug">${project.title}</h3>
+                    <p class="mt-2 text-sm text-zinc-500 leading-relaxed line-clamp-3">${project.description}</p>
+                    <span class="mt-4 inline-block text-sm font-medium text-emerald-600 hover:text-emerald-700">Подробнее</span>
                 `;
                 
-                // Add event listener to the whole card
                 card.addEventListener('click', (e) => {
-                    // Если клик был по ссылке, позволить ей открыться в новой вкладке
-                    if (e.target.tagName === 'A') {
+                    if (e.target.tagName === 'A' || e.target.tagName === 'SPAN') {
+                        if (e.target.classList.contains('text-emerald-600')) {
+                            window.open(linkTarget, '_blank');
+                        }
                         return;
                     }
-                    
-                    // Если клик был по телу карточки, также открыть ссылку
                     e.preventDefault();
                     window.open(linkTarget, '_blank');
                 });
                 
-                // Установить target="_blank" для всех ссылок в карточках
-                const anchor = card.querySelector('a');
-                anchor.setAttribute('target', '_blank');
-                
-                // Остановить всплытие, чтобы клик по ссылке не вызывал клик по карточке
-                anchor.addEventListener('click', (e) => {
-                    e.stopPropagation(); 
-                });
-                
                 projectGrid.appendChild(card);
+                revealObserver.observe(card);
             });
 
-            // --- Логика модального окна (УДАЛЕНО) ---
-
-
-            // --- Данные для таймлайна ---
+            // --- Данные таймлайна ---
             const experiences = [
                 {
-                    date: 'Март 2021 – по настоящее время',
+                    date: 'Март 2021 — н.в.',
                     title: 'Инженер по АСУ',
                     company: 'ООО «Птицеводческий комплекс «Продукты питания» (г. Калининград)',
                     description: '<strong>Цифровизация и IT-интеграция:</strong><br>• Автоматизация складского учёта (PWA/WMS): разработал с нуля веб-приложение для учёта запчастей на 3 складах и 44 залах. QR-маркировка, офлайн-режим (IndexedDB), Firebase. Исключены потери от нехватки деталей.<br>• Разработка ПО для ТОиР: внедрил веб-приложение для мониторинга состояния залов и трекинга ремонтов.<br>• Интеграция ИИ-ассистентов: интеллектуальная база знаний на базе LLM по технической документации.<br>• Change Management: миграция 20+ специалистов на корпоративную платформу MAX (eXpress).<br>• Bitrix24: добавление сотрудников, обучение персонала работе с платформой.<br><br><strong>Промышленная автоматизация (АСУ ТП):</strong><br>• Обслуживание и ПНР ЩУ микроклимата на 22 птичниках: SKOV Viper Classic/Touch (5 залов), BigDutchman (14 залов, включая ПНР клеточного содержания, EL-ZNR), Fancom (3 зала).<br>• Полная замена оборудования микроклимата: щиты управления, контроллеры, сигнализация. Расследование и устранение сложных неисправностей, выявление ошибок электромонтажа.<br>• Контроль микроклимата бройлеров, обходы залов.<br>• Обучение зоотехников и новых специалистов.'
                 },
                 {
-                    date: 'Апрель 2019 – Февраль 2021',
+                    date: 'Апрель 2019 — Февраль 2021',
                     title: 'Инженер АСУП',
                     company: 'ООО "ТПК "Балтптицепром" (г. Калининград)',
                     description: 'Техническое обслуживание автоматизированных систем управления микроклиматом на нескольких производственных объектах комплекса.'
                 },
                 {
-                    date: 'Январь 2019 – Апрель 2019',
+                    date: 'Январь 2019 — Апрель 2019',
                     title: 'Слесарь КИПиА',
                     company: 'ООО "ТПК "Балтптицепром" (г. Калининград)',
                     description: 'Текущий и профилактический ремонт механизмов и технологического оборудования.'
                 },
                 {
-                    date: 'Октябрь 2016 – Январь 2017',
+                    date: 'Октябрь 2016 — Январь 2017',
                     title: 'Техник группы АСУТП',
                     company: 'ООО "Про-Ток" (г. Красноярск)',
                     description: 'Настройка системы пожарной сигнализации (С2000М в Bolid Pprog) на АО «Полюс Вернинское».'
                 },
                 {
-                    date: 'Июль 2016 – Октябрь 2016',
+                    date: 'Июль 2016 — Октябрь 2016',
                     title: 'Электромонтажник',
                     company: 'ООО "МЭС" (г. Красноярск)',
                     description: 'Электромонтажные работы до и свыше 1000В.'
                 },
                 {
                     date: 'Апрель 2015 — Июнь 2015',
-                    title: 'Электромонтажник - наладчик (практика)',
+                    title: 'Электромонтажник-наладчик (практика)',
                     company: 'ООО КПНУ "СВЭМ" (г. Красноярск)',
                     description: 'ПНР с использованием выездной автолаборатории.'
                 }
@@ -724,26 +831,28 @@
 
             // --- Заполнение таймлайна ---
             const timelineContainer = document.querySelector('#timeline-container .relative');
-            experiences.forEach(exp => {
+            experiences.forEach((exp, index) => {
                 const item = document.createElement('div');
-                item.className = 'ml-8 mb-10 pb-1';
+                const staggerClass = `stagger-${(index % 6) + 1}`;
+                item.className = `ml-8 mb-10 pb-1 reveal-item ${staggerClass}`;
                 item.innerHTML = `
-                    <div class="absolute w-5 h-5 bg-white border-2 border-blue-500 rounded-full timeline-item-dot"></div>
-                    <div class="relative bg-white p-6 rounded-2xl shadow-xl">
-                        <time class="text-sm font-semibold text-blue-600">${exp.date}</time>
-                        <h3 class="text-xl font-bold text-gray-900 mt-1">${exp.title}</h3>
-                        <p class="text-md font-semibold text-gray-700 mt-1">${exp.company}</p>
-                        <p class="text-gray-600 mt-2">${exp.description}</p>
+                    <div class="absolute w-4 h-4 bg-white border-2 border-emerald-500 rounded-full timeline-item-dot" style="box-shadow: 0 0 0 4px rgba(5,150,105,0.1);"></div>
+                    <div class="relative card-surface p-6">
+                        <time class="text-xs font-mono font-medium text-emerald-600">${exp.date}</time>
+                        <h3 class="text-lg font-semibold text-zinc-900 mt-1">${exp.title}</h3>
+                        <p class="text-sm font-medium text-zinc-600 mt-1">${exp.company}</p>
+                        <div class="mt-3 text-sm text-zinc-600 leading-relaxed">${exp.description}</div>
                     </div>
                 `;
                 timelineContainer.appendChild(item);
+                revealObserver.observe(item);
             });
 
-            // --- Логика кнопки "Наверх" ---
+            // --- Кнопка "Наверх" ---
             const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
 
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
+                if (window.scrollY > 400) {
                     scrollToTopBtn.classList.remove('opacity-0', 'invisible');
                     scrollToTopBtn.classList.add('opacity-100', 'visible');
                 } else {
