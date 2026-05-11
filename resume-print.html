@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Резюме — Людвиг К.А. | Инженер АСУ ТП</title>
+    <style>
+        @page { margin: 20mm; size: A4; }
+        
+        @media print {
+            body { margin: 0; padding: 0; }
+            .no-print { display: none !important; }
+            a { text-decoration: none; color: #000; }
+        }
+        
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 11pt;
+            line-height: 1.45;
+            color: #1a1a1a;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20mm;
+            background: #fff;
+        }
+        
+        header { text-align: center; margin-bottom: 18pt; }
+        
+        h1 {
+            font-size: 22pt;
+            font-weight: 700;
+            margin: 0 0 4pt 0;
+            letter-spacing: -0.5pt;
+            color: #000;
+        }
+        
+        .position {
+            font-size: 12pt;
+            color: #059669;
+            font-weight: 600;
+            margin-bottom: 10pt;
+        }
+        
+        .contacts {
+            font-size: 10pt;
+            color: #444;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6pt 16pt;
+        }
+        
+        .contacts span { white-space: nowrap; }
+        
+        h2 {
+            font-size: 13pt;
+            font-weight: 700;
+            color: #000;
+            border-bottom: 1.5pt solid #059669;
+            padding-bottom: 4pt;
+            margin: 16pt 0 10pt 0;
+            text-transform: uppercase;
+            letter-spacing: 0.3pt;
+        }
+        
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10pt;
+            margin-bottom: 4pt;
+        }
+        
+        .highlight-box {
+            text-align: center;
+            padding: 8pt;
+            background: #f6fdf9;
+            border: 1pt solid #dcfce7;
+            border-radius: 4pt;
+        }
+        
+        .highlight-number {
+            font-size: 18pt;
+            font-weight: 700;
+            color: #059669;
+            line-height: 1;
+        }
+        
+        .highlight-label {
+            font-size: 8pt;
+            color: #555;
+            margin-top: 4pt;
+            line-height: 1.2;
+        }
+        
+        .summary {
+            font-size: 10.5pt;
+            color: #333;
+            text-align: center;
+            max-width: 90%;
+            margin: 0 auto 4pt;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12pt;
+        }
+        
+        .skill-col h3 {
+            font-size: 10pt;
+            font-weight: 700;
+            margin: 0 0 5pt 0;
+            color: #000;
+        }
+        
+        .skill-col .tag {
+            font-size: 7.5pt;
+            color: #059669;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3pt;
+            margin-bottom: 5pt;
+            display: block;
+        }
+        
+        .skill-col ul {
+            margin: 0;
+            padding-left: 14pt;
+            font-size: 9.5pt;
+            color: #333;
+        }
+        
+        .skill-col li { margin-bottom: 3pt; }
+        
+        .job { margin-bottom: 12pt; }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2pt;
+        }
+        
+        .job-title {
+            font-weight: 700;
+            font-size: 11pt;
+            color: #000;
+        }
+        
+        .job-date {
+            font-size: 9.5pt;
+            color: #666;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .job-company {
+            font-size: 9.5pt;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 4pt;
+        }
+        
+        .job ul {
+            margin: 0;
+            padding-left: 16pt;
+            font-size: 9.5pt;
+            color: #333;
+        }
+        
+        .job li { margin-bottom: 2pt; }
+        
+        .edu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14pt;
+        }
+        
+        .edu-item h3 {
+            font-size: 10.5pt;
+            font-weight: 700;
+            margin: 0 0 2pt 0;
+        }
+        
+        .edu-item .edu-meta {
+            font-size: 9pt;
+            color: #666;
+            margin-bottom: 2pt;
+        }
+        
+        .edu-item .edu-detail {
+            font-size: 9pt;
+            color: #444;
+        }
+        
+        .lang-table {
+            width: 100%;
+            font-size: 9.5pt;
+        }
+        
+        .lang-table td { padding: 2pt 8pt 2pt 0; }
+        
+        .projects-link {
+            font-size: 10pt;
+            text-align: center;
+            padding: 8pt;
+            background: #f6fdf9;
+            border: 1pt solid #dcfce7;
+            border-radius: 4pt;
+        }
+        
+        .ps {
+            font-size: 9.5pt;
+            color: #444;
+            text-align: center;
+            margin-top: 14pt;
+            padding: 10pt;
+            background: #f6fdf9;
+            border-radius: 4pt;
+            border: 1pt solid #dcfce7;
+        }
+        
+        @media screen and (max-width: 600px) {
+            body { padding: 12pt; }
+            .highlights { grid-template-columns: repeat(2, 1fr); }
+            .skills-grid { grid-template-columns: 1fr; }
+            .edu-grid { grid-template-columns: 1fr; }
+            .job-header { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Людвиг Константин Анатольевич</h1>
+                <div class="position">Инженер АСУ ТП (птицеводство) | Цифровизация производства</div>
+                <div class="contacts">
+                    <span>+7 (911) 457-99-37</span>
+                    <span>qx1433@gmail.com</span>
+                    <span>Калининград (готов к переезду)</span>
+                    <span>qx1433.github.io/resume</span>
+                </div>
+                <div style="margin-top: 6pt; font-size: 9pt; color: #666; text-align: center;">
+                    1992 г.р. (33 года) &nbsp;|&nbsp; Гражданство РФ &nbsp;|&nbsp; Права кат. B &nbsp;|&nbsp; Готов к командировкам
+                </div>
+</header>
+
+<section>
+    <div class="highlights">
+        <div class="highlight-box">
+            <div class="highlight-number">5+</div>
+            <div class="highlight-label">лет в птицеводстве</div>
+        </div>
+        <div class="highlight-box">
+            <div class="highlight-number">44</div>
+            <div class="highlight-label">птичника под управлением</div>
+        </div>
+        <div class="highlight-box">
+            <div class="highlight-number">3</div>
+            <div class="highlight-label">цифровых продукта для цеха</div>
+        </div>
+        <div class="highlight-box">
+            <div class="highlight-number">2</div>
+            <div class="highlight-label">АСУ запущены с нуля</div>
+        </div>
+    </div>
+    
+    <p class="summary">
+        Обслуживаю системы микроклимата BigDutchman, Fancom, SKOV. Разрабатываю управляющую логику для ПЛК Siemens и ОВЕН (ST, LD). Создаю внутренние цифровые инструменты для производства. Расследую сложные неисправности, которые другие считают нормой.
+    </p>
+</section>
+
+<section>
+    <h2>Дополнительная информация</h2>
+    <div style="font-size: 10pt; color: #333;">
+        <strong>Зарплатные ожидания:</strong> от 120 000 ₽ на руки<br>
+        <strong>График работы:</strong> полный день, готов к командировкам<br>
+        <strong>Переезд:</strong> готов рассмотреть<br>
+        <strong>Гражданство:</strong> Российская Федерация<br>
+        <strong>Водительское удостоверение:</strong> категория B (личный автомобиль отсутствует)
+    </div>
+</section>
+
+<section>
+    <h2>Навыки</h2>
+    <div class="skills-grid">
+        <div class="skill-col">
+            <h3>Промышленная автоматика</h3>
+            <span class="tag">Основной фокус</span>
+            <ul>
+                <li>Системы микроклимата: BigDutchman, DACS, Fancom, SKOV — 44 объекта</li>
+                <li>ПЛК: Siemens (Step7, TIA Portal, Logo), ОВЕН (CodeSys)</li>
+                <li>Языки МЭК 61131-3: ST (приоритет), LD, FBD, SCL</li>
+                <li>Электротехника: чтение схем, ПНР, расследование неисправностей</li>
+            </ul>
+        </div>
+        <div class="skill-col">
+            <h3>Цифровизация и IIoT</h3>
+            <span class="tag">Внутренние продукты</span>
+            <ul>
+                <li>PWA: складской учёт (3 склада, 44 зала), офлайн-режим</li>
+                <li>Стек: Vanilla JS, Firebase, IndexedDB, REST API</li>
+                <li>Интеграции: Telegram API, Google API, Bitrix24</li>
+            </ul>
+        </div>
+        <div class="skill-col">
+            <h3>Отрасль и менеджмент</h3>
+            <span class="tag">Дополнительно</span>
+            <ul>
+                <li>Экспертиза птицеводства: бройлеры, кормление, вентиляция</li>
+                <li>Change Management: миграция 20+ специалистов на платформу MAX</li>
+                <li>Обучение персонала: зоотехники, инженеры, мастера</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Опыт работы</h2>
+    
+    <div class="job">
+        <div class="job-header">
+            <span class="job-title">Инженер по АСУ</span>
+            <span class="job-date">Март 2021 — н.в.</span>
+        </div>
+        <div class="job-company">ООО «Птицеводческий комплекс «Продукты питания», г. Калининград</div>
+        <ul>
+            <li><strong>АСУ ТП:</strong> Обслуживание и ПНР щитов управления микроклимата на 44 птичниках (SKOV, BigDutchman, Fancom). Полная замена оборудования, расследование сложных неисправностей, выявление ошибок электромонтажа.</li>
+            <li><strong>Цифровизация:</strong> Разработал с нуля PWA-приложение для складского учёта (3 склада, 44 зала). Офлайн-режим, QR-маркировка, Firebase.</li>
+            <li><strong>Внедрение изменений:</strong> Миграция 20+ специалистов на платформу MAX. Адаптация Bitrix24 под производство, обучение инженеров и мастеров.</li>
+            <li>Обучение зоотехников и онбординг новых инженеров АСУ.</li>
+        </ul>
+    </div>
+    
+    <div class="job">
+        <div class="job-header">
+            <span class="job-title">Инженер АСУП</span>
+            <span class="job-date">Апрель 2019 — Февраль 2021</span>
+        </div>
+        <div class="job-company">ООО «ТПК «Балтптицепром», г. Калининград</div>
+        <ul>
+            <li>Техническое обслуживание АСУ микроклимата на производственных объектах комплекса.</li>
+        </ul>
+    </div>
+    
+    <div class="job">
+        <div class="job-header">
+            <span class="job-title">Слесарь КИПиА</span>
+            <span class="job-date">Январь 2019 — Апрель 2019</span>
+        </div>
+        <div class="job-company">ООО «ТПК «Балтптицепром», г. Калининград</div>
+        <ul>
+            <li>Текущий и профилактический ремонт технологического оборудования.</li>
+        </ul>
+    </div>
+    
+    <div class="job">
+        <div class="job-header">
+            <span class="job-title">Техник группы АСУТП</span>
+            <span class="job-date">Октябрь 2016 — Январь 2017</span>
+        </div>
+        <div class="job-company">ООО «Про-Ток», г. Красноярск</div>
+        <ul>
+            <li>Настройка пожарной сигнализации (С2000М в Bolid Pprog) на АО «Полюс Вернинское».</li>
+        </ul>
+    </div>
+    
+    <div class="job">
+        <div class="job-header">
+            <span class="job-title">Электромонтажник</span>
+            <span class="job-date">Июль 2016 — Октябрь 2016</span>
+        </div>
+        <div class="job-company">ООО «МЭС», г. Красноярск</div>
+        <ul>
+            <li>Электромонтажные работы до и свыше 1000В.</li>
+        </ul>
+    </div>
+    
+    <div class="job">
+        <div class="job-header">
+            <span class="job-title">Электромонтажник-наладчик (практика)</span>
+            <span class="job-date">Апрель 2015 — Июнь 2015</span>
+        </div>
+        <div class="job-company">ООО КПНУ «СВЭМ», г. Красноярск</div>
+        <ul>
+            <li>ПНР с использованием выездной автолаборатории.</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Образование</h2>
+    <div class="edu-grid">
+        <div class="edu-item">
+            <h3>Красноярский политехнический техникум</h3>
+            <div class="edu-meta">2016 — Диплом с отличием</div>
+            <div class="edu-detail">Монтаж, наладка и эксплуатация электрооборудования. Квалификация: техник-электрик.</div>
+            <div class="edu-detail"><em>Создал обучающие стенды: макет подстанции на Siemens LOGO, стенд для Simatic S7-1200.</em></div>
+        </div>
+        <div class="edu-item">
+            <h3>Московский технологический институт (МТИ)</h3>
+            <div class="edu-meta">Студент, сентябрь 2025 — 2029 (ожидаемое окончание)</div>
+            <div class="edu-detail">27.03.04 Управление в технических системах, заочная форма.</div>
+            <div class="edu-detail">ТАУ, ПЛК-программирование, Modbus, Profibus, OPC UA, микропроцессорные системы.</div>
+            <div class="edu-detail">III группа по электробезопасности.</div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Языки</h2>
+    <table class="lang-table">
+        <tr>
+            <td><strong>Русский</strong></td>
+            <td>Родной</td>
+        </tr>
+        <tr>
+            <td><strong>Английский</strong></td>
+            <td>B1 — чтение технической документации, переписка с вендорами</td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <h2>Проекты</h2>
+    <div class="projects-link">
+        Подробные кейсы и портфолио: <strong>qx1433.github.io/resume</strong>
+    </div>
+</section>
+
+<section>
+    <div class="ps">
+        <strong>Готов к диалогу.</strong> Рассматриваю позиции инженера АСУ ТП и специалиста по цифровизации в агропромышленном секторе. Готов обсудить задачи вашего производства и показать, как автоматизация + цифровизация снижают простои и повышают прозрачность процессов.
+    </div>
+</section>
+
+</body>
+</html>
